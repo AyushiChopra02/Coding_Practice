@@ -1,0 +1,25 @@
+https://codeforces.com/problemset/problem/545/D
+
+import java.util.Arrays;
+import java.util.Scanner;
+public class Problem545D {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int no = sc.nextInt();
+        long time[] = new long[no];
+        for(int i=0 ; i< no ; i++){
+            time[i] =sc.nextLong();
+        }
+        Arrays.sort(time);
+        long count = 0;
+        long wait = time[0];
+        for(int i=1; i<no ; i++){
+            if(wait > time[i]){
+                count++ ;
+            }else{
+                wait = wait + time[i];
+            }
+        }
+        System.out.println(no - count);
+    }
+}
