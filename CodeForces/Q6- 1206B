@@ -1,0 +1,45 @@
+https://codeforces.com/problemset/problem/1206/B
+
+rt java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+ 
+public class Problem1206B {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextInt(); 
+        List<Long> zeros = new ArrayList<>();
+        List<Long> pos = new ArrayList<>();
+        List<Long> neg = new ArrayList<>();
+        long input;
+        
+        for (int i = 0; i < n; i++) {
+            input = sc.nextInt(); 
+            if (input > 0) {
+                pos.add(input);
+            } else if (input == 0) {
+                zeros.add(input);
+            } else {
+                neg.add(input);
+            }
+        }
+        
+        long cost = 0;
+        
+        for (int i = 0; i < pos.size(); i++) {
+            cost = cost + (pos.get(i) - 1);
+        }
+        
+        for (int i = 0; i < neg.size(); i++) {
+            cost = cost + (-1-neg.get(i));
+        }
+        
+       if(zeros.size()>0){
+           cost = cost+ zeros.size();
+       }else if(neg.size() %2 == 1){
+           cost = cost +2;
+       }
+        
+        System.out.println(cost);
+    }
+}

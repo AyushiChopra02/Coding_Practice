@@ -1,0 +1,40 @@
+https://codeforces.com/problemset/problem/1220/A
+
+import java.util.Scanner;
+import java.util.HashMap;
+ 
+public class MaxBinaryNumber {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int n = scanner.nextInt();
+        scanner.nextLine();  
+        String input = scanner.nextLine();
+ 
+      
+        HashMap<Character, Integer> letterCount = new HashMap<>();
+        for (char ch : input.toCharArray()) {
+            letterCount.put(ch, letterCount.getOrDefault(ch, 0) + 1);
+        }
+ 
+      
+        int countOne = Math.min(letterCount.getOrDefault('o', 0), 
+                                Math.min(letterCount.getOrDefault('n', 0), 
+                                         letterCount.getOrDefault('e', 0)));
+        int countZero = Math.min(letterCount.getOrDefault('z', 0), 
+                                 Math.min(letterCount.getOrDefault('e', 0) - countOne, 
+                                          Math.min(letterCount.getOrDefault('r', 0), 
+                                                   letterCount.getOrDefault('o', 0) - countOne)));
+        
+ 
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < countOne; i++) {
+            result.append("1 ");
+        }
+        for (int i = 0; i < countZero; i++) {
+            result.append("0 ");
+        }
+ 
+    
+        System.out.println(result.toString().trim());
+    }
+}
