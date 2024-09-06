@@ -1,0 +1,24 @@
+https://codeforces.com/problemset/problem/4/C
+
+
+import java.util.HashMap;
+import java.util.Scanner;
+public class Problem4C {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        long n = sc.nextLong();
+        HashMap<String , Integer> user = new HashMap<>();
+        String input;
+        while(n-- >= 1){
+            input = sc.next();
+            if(user.containsKey(input)){
+                System.out.println(input+""+user.get(input));
+                user.put(input,user.get(input)+1);
+                 user.put(input+""+user.get(input),1);
+            }else{
+                user.put(input,1);
+                System.out.println("OK");
+            }
+        }
+    }
+}
