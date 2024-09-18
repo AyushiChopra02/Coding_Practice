@@ -1,0 +1,19 @@
+https://codeforces.com/problemset/problem/677/A
+
+import java.util.Scanner;
+public class Problem677A {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n= sc.nextInt();
+        int h = sc.nextInt();
+        int count =0;
+        while(n-- >= 1 ){
+            if(sc.nextInt() <=h){
+                count ++;
+            }else{
+                count = count +2;
+            }
+        }
+        System.out.println(count);
+    }
+}
