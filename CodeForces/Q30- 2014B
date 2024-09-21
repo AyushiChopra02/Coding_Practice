@@ -1,0 +1,31 @@
+https://codeforces.com/contest/2014/problem/B
+
+import java.util.Scanner;
+ 
+public class MajorOakLeaves {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int t = scanner.nextInt(); 
+        
+        while (t-- > 0) {
+            long n = scanner.nextLong(); 
+            long k = scanner.nextLong(); 
+            
+ 
+            long startYear = Math.max(1, n - k + 1);
+            long endYear = n;
+            
+           
+            long totalLeaves = (endYear * (endYear + 1)) / 2 - ((startYear - 1) * startYear) / 2;
+ 
+        
+            if (totalLeaves % 2 == 0) {
+                System.out.println("YES");
+            } else {
+                System.out.println("NO");
+            }
+        }
+        
+        scanner.close();
+    }
+}
