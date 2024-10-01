@@ -1,0 +1,28 @@
+https://leetcode.com/problems/check-if-array-pairs-are-divisible-by-k/description/?envType=daily-question&envId=2024-10-01
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public boolean canArrange(int[] arr, int k) {
+        int[] remainderFreq = new int[k];
+
+        for (int num : arr) {
+            int remainder = ((num % k) + k) % k; 
+            remainderFreq[remainder]++;
+        }
+        for (int i = 0; i <= k / 2; i++) {
+            if (i == 0) {
+                if (remainderFreq[0] % 2 != 0) {
+                    return false;
+                }
+            } else {
+                if (remainderFreq[i] != remainderFreq[k - i]) {
+                    return false;
+                }
+            }
+        }
+
+        return true;
+    }
+}
