@@ -1,0 +1,75 @@
+https://leetcode.com/problems/partition-list/description/?envType=study-plan-v2&envId=top-interview-150
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+
+    public static ListNode deserialize(String data) {
+        if (data.equals("[]")) return null;
+
+        String[] values = data.replaceAll("[\\[\\] ]", "").split(",");
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        for (String value : values) {
+            current.next = new ListNode(Integer.parseInt(value));
+            current = current.next;
+        }
+
+        return dummy.next;
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        ListNode current = this;
+        while (current != null) {
+            result.append(current.val).append(current.next != null ? "," : "");
+            current = current.next;
+        }
+        result.append("]");
+        return result.toString();
+    }
+}
+
+class Solution {
+    public ListNode partition(ListNode head, int x) {
+        ListNode lessHead = new ListNode(0);
+        ListNode greaterHead = new ListNode(0);
+        ListNode less = lessHead;
+        ListNode greater = greaterHead;
+
+        while (head != null) {
+            if (head.val < x) {
+                less.next = head;
+                less = less.next;
+            } else {
+                greater.next = head;
+                greater = greater.next;
+            }
+            head = head.next;
+        }
+
+        greater.next = null;
+        less.next = greaterHead.next;
+
+        return lessHead.next;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "[1,4,3,2,5,2]";
+        int x = 3;
+
+        ListNode head = ListNode.deserialize(input);
+        Solution solution = new Solution();
+        ListNode result = solution.partition(head, x);
+        System.out.println(result);
+    }
+}
