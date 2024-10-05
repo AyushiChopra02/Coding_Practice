@@ -1,0 +1,84 @@
+https://leetcode.com/problems/add-two-numbers/description/?envType=study-plan-v2&envId=top-interview-150
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+
+
+    public static ListNode deserialize(String data) {
+        String[] values = data.replaceAll("[\\[\\] ]", "").split(",");
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+
+        for (String value : values) {
+            current.next = new ListNode(Integer.parseInt(value));
+            current = current.next;
+        }
+
+        return dummyHead.next; 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        ListNode current = this;
+        while (current != null) {
+            result.append(current.val).append(current.next != null ? "," : "");
+            current = current.next;
+        }
+        result.append("]");
+        return result.toString();
+    }
+}
+
+class Solution {
+    public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
+        ListNode dummyHead = new ListNode(0);
+        ListNode current = dummyHead;
+        int carry = 0;
+
+        while (l1 != null || l2 != null || carry != 0) {
+            int sum = carry; 
+
+            if (l1 != null) {
+                sum += l1.val; 
+                l1 = l1.next;  
+            }
+
+            if (l2 != null) {
+                sum += l2.val; 
+                l2 = l2.next;  
+            }
+
+            carry = sum / 10; 
+            current.next = new ListNode(sum % 10); 
+            current = current.next; 
+        }
+
+        return dummyHead.next; 
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+      
+        String l1Input = "[2,4,3]";
+        String l2Input = "[5,6,4]";
+
+       
+        ListNode l1 = ListNode.deserialize(l1Input);
+        ListNode l2 = ListNode.deserialize(l2Input);
+
+        
+        Solution solution = new Solution();
+        ListNode result = solution.addTwoNumbers(l1, l2);
+
+        
+        System.out.println(result); 
+    }
+}
