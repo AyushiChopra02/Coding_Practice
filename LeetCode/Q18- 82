@@ -1,0 +1,76 @@
+https://leetcode.com/problems/remove-duplicates-from-sorted-list-ii/description/?envType=study-plan-v2&envId=top-interview-150
+
+class ListNode {
+    int val;
+    ListNode next;
+
+    ListNode(int x) {
+        val = x;
+        next = null;
+    }
+
+   
+    public static ListNode deserialize(String data) {
+        if (data.equals("[]")) return null; 
+
+        String[] values = data.replaceAll("[\\[\\] ]", "").split(",");
+        ListNode dummy = new ListNode(0);
+        ListNode current = dummy;
+
+        for (String value : values) {
+            current.next = new ListNode(Integer.parseInt(value));
+            current = current.next;
+        }
+
+        return dummy.next; 
+    }
+
+    @Override
+    public String toString() {
+        StringBuilder result = new StringBuilder("[");
+        ListNode current = this;
+        while (current != null) {
+            result.append(current.val).append(current.next != null ? "," : "");
+            current = current.next;
+        }
+        result.append("]");
+        return result.toString();
+    }
+}
+
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        ListNode dummy = new ListNode(0); // Create a dummy head
+        ListNode prev = dummy; // Previous node pointer
+        dummy.next = head; // Link dummy to the head
+
+        while (head != null) {
+            // Check if current node has duplicates
+            if (head.next != null && head.val == head.next.val) {
+                // Skip all nodes with the same value
+                while (head.next != null && head.val == head.next.val) {
+                    head = head.next;
+                }
+           
+                prev.next = head.next;
+            } else {
+                prev = prev.next; 
+            }
+            head = head.next; 
+        }
+
+        return dummy.next; 
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        String input = "[1,2,3,3,4,4,5]";
+        ListNode head = ListNode.deserialize(input);
+        Solution solution = new Solution();
+        
+        ListNode result = solution.deleteDuplicates(head);
+
+        System.out.println(result); 
+    }
+}
