@@ -1,0 +1,29 @@
+https://leetcode.com/problems/merge-two-sorted-lists/description/
+
+class Solution {
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+       // ek dummy node bnaya ans ko return krne k lie
+       ListNode returnNode = new ListNode(Integer.MIN_VALUE);
+       ListNode headNode = returnNode;
+      
+       while(list1 != null && list2 != null) {
+            //loop chla dege jb tk list k end m nai phonchte
+            if(list1.val <= list2.val) {
+                returnNode.next = list1;
+                list1 = list1.next;
+            } else {
+                returnNode.next = list2;
+                list2 = list2.next;
+            }
+            returnNode = returnNode.next;
+       }
+       // If either list1 or list2 has remaining nodes to unhe lga do 
+       if(list1 == null) {
+            returnNode.next = list2;
+       } else if(list2 == null) {
+            returnNode.next = list1;
+       }
+       // Return the next of the dummy node, which is the head of the merged list
+       return headNode.next;
+    }
+}
