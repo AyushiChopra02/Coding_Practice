@@ -1,0 +1,43 @@
+https://leetcode.com/problems/the-number-of-the-smallest-unoccupied-chair/description/?envType=daily-question&envId=2024-10-11
+
+import java.util.*;
+
+class Solution {
+    public int smallestChair(int[][] times, int targetFriend) {
+        int n = times.length;
+        int[][] events = new int[n * 2][3];
+        
+        for (int i = 0; i < n; i++) {
+            events[i * 2] = new int[] { times[i][0], i, 1 };
+            events[i * 2 + 1] = new int[] { times[i][1], i, 0 };
+        }
+        
+        Arrays.sort(events, (a, b) -> a[0] == b[0] ? Integer.compare(a[2], b[2]) : Integer.compare(a[0], b[0]));
+        
+        PriorityQueue<Integer> availableChairs = new PriorityQueue<>();
+        int[] assignedChairs = new int[n];
+        
+        for (int i = 0; i < n; i++) {
+            availableChairs.offer(i);
+        }
+        
+        for (int[] event : events) {
+            int time = event[0];
+            int friend = event[1];
+            int type = event[2];
+            
+            if (type == 1) {
+                int assignedChair = availableChairs.poll();
+                assignedChairs[friend] = assignedChair;
+                
+                if (friend == targetFriend) {
+                    return assignedChair;
+                }
+            } else {
+                availableChairs.offer(assignedChairs[friend]);
+            }
+        }
+        
+        return -1;
+    }
+}
