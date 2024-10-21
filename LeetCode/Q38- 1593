@@ -1,0 +1,41 @@
+https://leetcode.com/problems/split-a-string-into-the-max-number-of-unique-substrings/?envType=daily-question&envId=2024-10-21
+
+import java.util.HashSet;
+
+public class Solution {
+    private int maxUniqueSplit;
+
+    public int maxUniqueSplit(String s) {
+        maxUniqueSplit = 0;
+        backtrack(s, 0, new HashSet<>());
+        return maxUniqueSplit;
+    }
+
+    private void backtrack(String s, int start, HashSet<String> uniqueSubstrings) {
+
+        if (start == s.length()) {
+            maxUniqueSplit = Math.max(maxUniqueSplit, uniqueSubstrings.size());
+            return;
+        }
+
+       
+        for (int i = start + 1; i <= s.length(); i++) {
+            String currentSubstr = s.substring(start, i);
+
+            if (!uniqueSubstrings.contains(currentSubstr)) {
+                uniqueSubstrings.add(currentSubstr); 
+                backtrack(s, i, uniqueSubstrings);   
+                uniqueSubstrings.remove(currentSubstr); 
+            }
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Test cases
+        System.out.println(sol.maxUniqueSplit("ababccc")); 
+        System.out.println(sol.maxUniqueSplit("aba"));    
+        System.out.println(sol.maxUniqueSplit("aa"));     
+    }
+}
