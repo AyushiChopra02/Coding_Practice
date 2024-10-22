@@ -1,6 +1,6 @@
 https://leetcode.com/problems/n-queens/description/
 
-import java.util.*;
+import java.util.*; 
 class Solution {
     public static List<List<String>> solveNQueens(int n) {
         char[][] board = new char[n][n];
