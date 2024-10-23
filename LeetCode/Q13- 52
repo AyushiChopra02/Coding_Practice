@@ -1,5 +1,5 @@
 https://leetcode.com/problems/n-queens-ii/description/
-
+ 
 import java.util.Arrays;
 
 class Solution {
