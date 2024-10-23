@@ -1,0 +1,50 @@
+
+https://leetcode.com/problems/cousins-in-binary-tree-ii/?envType=daily-question&envId=2024-10-23
+
+
+class Solution {
+    public TreeNode replaceValueInTree(TreeNode root) {
+        if (root == null) return null;
+        
+        Map<TreeNode, Integer> siblingMap = new HashMap<>(); 
+        java.util.Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int sum = root.val;
+        
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            int currentLevelSum = 0; 
+            
+            
+            while (size-- != 0) {
+                TreeNode currentNode = queue.poll();
+                int remaining = sum - currentNode.val; 
+
+                if (siblingMap.containsKey(currentNode)) {
+                    remaining -= siblingMap.get(currentNode);
+                }
+
+                currentNode.val = remaining; 
+                if (currentNode.left != null) {
+                    queue.add(currentNode.left);
+                    currentLevelSum += currentNode.left.val;
+                    
+                    if (currentNode.right != null) {
+                        siblingMap.put(currentNode.left, currentNode.right.val);
+                    }
+                }
+                if (currentNode.right != null) {
+                    queue.add(currentNode.right);
+                    currentLevelSum += currentNode.right.val;
+                    
+                    if (currentNode.left != null) {
+                        siblingMap.put(currentNode.right, currentNode.left.val);
+                    }
+                }
+            }
+            sum = currentLevelSum; // Update the sum for the next level
+        }
+        
+        return root;
+    }
+}
