@@ -1,0 +1,48 @@
+https://leetcode.com/problems/height-of-binary-tree-after-subtree-removal-queries/description/?envType=daily-question&envId=2024-10-26
+
+class Solution {
+    int max;
+    
+    public int[] treeQueries(TreeNode root, int[] queries) {
+        int[] right = new int[100001];
+        int[] left = new int[100001];
+        max = 0;
+        
+        // Calculate left heights
+        calculateLeft(root, left, 0);
+        
+        max = 0; // Reset max for right calculation
+        // Calculate right heights
+        calculateRight(root, right, 0);
+        
+        // Create result array to hold the heights after queries
+        int[] result = new int[queries.length];
+        for (int i = 0; i < queries.length; i++) {
+            // Calculate the height of the tree after removing the queried node's subtree
+            result[i] = Math.max(left[queries[i]], right[queries[i]]);
+        }
+        return result;
+    }
+
+    private void calculateLeft(TreeNode root, int[] left, int d) {
+        if (root == null) return;
+        
+        left[root.val] = max; // Store the current maximum depth
+        max = Math.max(max, d); // Update the max depth
+
+        // Traverse left and right children
+        calculateLeft(root.left, left, d + 1);
+        calculateLeft(root.right, left, d + 1);
+    }
+
+    private void calculateRight(TreeNode root, int[] right, int d) {
+        if (root == null) return;
+        
+        right[root.val] = max; // Store the current maximum depth
+        max = Math.max(max, d); // Update the max depth
+
+        // Traverse right and left children
+        calculateRight(root.right, right, d + 1);
+        calculateRight(root.left, right, d + 1);
+    }
+}
