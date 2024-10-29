@@ -1,0 +1,64 @@
+https://leetcode.com/problems/maximum-number-of-moves-in-a-grid/description/?envType=daily-question&envId=2024-10-29
+
+import java.util.*;
+
+public class Solution {
+    private int[][] grid;
+    private int m, n;
+    private int[][] memo;
+
+    public int maxMoves(int[][] grid) {
+        this.grid = grid;
+        this.m = grid.length;
+        this.n = grid[0].length;
+        this.memo = new int[m][n];
+        int maxMoves = 0;
+
+       
+        for (int i = 0; i < m; i++) {
+            maxMoves = Math.max(maxMoves, dfs(i, 0));
+        }
+        return maxMoves;
+    }
+
+    private int dfs(int row, int col) {
+      
+        if (col == n - 1) {
+            return 0;
+        }
+       
+        if (memo[row][col] != 0) {
+            return memo[row][col];
+        }
+        
+        int maxMove = 0;
+
+      
+        for (int newRow = row - 1; newRow <= row + 1; newRow++) {
+            if (newRow >= 0 && newRow < m && grid[newRow][col + 1] > grid[row][col]) {
+                maxMove = Math.max(maxMove, 1 + dfs(newRow, col + 1));
+            }
+        }
+      
+        memo[row][col] = maxMove;
+        return maxMove;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[][] grid1 = {
+            {2, 4, 3, 5},
+            {5, 4, 9, 3},
+            {3, 4, 2, 11},
+            {10, 9, 13, 15}
+        };
+        System.out.println(solution.maxMoves(grid1));
+
+        int[][] grid2 = {
+            {3, 2, 4},
+            {2, 1, 9},
+            {1, 1, 7}
+        };
+        System.out.println(solution.maxMoves(grid2)); 
+    }
+}
