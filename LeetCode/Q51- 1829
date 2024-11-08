@@ -1,0 +1,40 @@
+https://leetcode.com/problems/maximum-xor-for-each-query/description/?envType=daily-question&envId=2024-11-08
+
+
+public class Solution {
+    public int[] getMaximumXor(int[] nums, int maximumBit) {
+        int n = nums.length;
+        int[] answer = new int[n];
+        int xorSum = 0;
+
+        for (int num : nums) {
+            xorSum ^= num;
+        }
+        int maxK = (1 << maximumBit) - 1;
+        for (int i = 0; i < n; i++) {
+      
+            answer[i] = xorSum ^ maxK;
+            xorSum ^= nums[n - 1 - i];
+        }
+
+        return answer;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums1 = {0, 1, 1, 3};
+        int maximumBit1 = 2;
+        int[] result1 = solution.getMaximumXor(nums1, maximumBit1);
+        System.out.println("Output for example 1: " + java.util.Arrays.toString(result1)); // [0, 3, 2, 3]
+
+        int[] nums2 = {2, 3, 4, 7};
+        int maximumBit2 = 3;
+        int[] result2 = solution.getMaximumXor(nums2, maximumBit2);
+        System.out.println("Output for example 2: " + java.util.Arrays.toString(result2)); // [5, 2, 6, 5]
+
+        int[] nums3 = {0, 1, 2, 2, 5, 7};
+        int maximumBit3 = 3;
+        int[] result3 = solution.getMaximumXor(nums3, maximumBit3);
+        System.out.println("Output for example 3: " + java.util.Arrays.toString(result3)); // [4, 3, 6, 4, 6, 7]
+    }
+}
