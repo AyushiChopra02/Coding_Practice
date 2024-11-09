@@ -1,0 +1,13 @@
+https://leetcode.com/problems/minimum-array-end/description/?envType=daily-question&envId=2024-11-09
+
+
+class Solution {
+    public long minEnd(int n, int x){
+        long ans =x ;
+        n-=1;
+        while(n-->0){
+            ans = (ans+1) | x;
+        }
+        return ans;
+    }
+}
