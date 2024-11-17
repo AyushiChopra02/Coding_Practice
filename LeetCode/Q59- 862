@@ -1,0 +1,49 @@
+https://leetcode.com/problems/shortest-subarray-with-sum-at-least-k/description/?envType=daily-question&envId=2024-11-17
+
+
+import java.util.Deque;
+import java.util.LinkedList;
+
+public class Solution {
+    public int shortestSubarray(int[] nums, int k) {
+        int n = nums.length;
+        
+        long[] prefixSum = new long[n + 1];
+        for (int i = 0; i < n; i++) {
+            prefixSum[i + 1] = prefixSum[i] + nums[i];
+        }
+        Deque<Integer> deque = new LinkedList<>();
+        int minLength = Integer.MAX_VALUE;
+
+        for (int i = 0; i <= n; i++) {
+        
+            while (!deque.isEmpty() && prefixSum[i] - prefixSum[deque.peekFirst()] >= k) {
+                minLength = Math.min(minLength, i - deque.pollFirst());
+            }
+            
+            while (!deque.isEmpty() && prefixSum[i] <= prefixSum[deque.peekLast()]) {
+                deque.pollLast();
+            }
+            
+            deque.offerLast(i);
+        }
+
+        return minLength == Integer.MAX_VALUE ? -1 : minLength;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        int[] nums1 = {1, 2, 3, 4, 5};
+        int k1 = 11;
+        System.out.println(solution.shortestSubarray(nums1, k1)); 
+        
+        int[] nums2 = {1, 2, 3, 4, 5};
+        int k2 = 15;
+        System.out.println(solution.shortestSubarray(nums2, k2)); 
+        
+        int[] nums3 = {1, 1, 1, 1, 1, 1};
+        int k3 = 4;
+        System.out.println(solution.shortestSubarray(nums3, k3)); 
+    }
+}
