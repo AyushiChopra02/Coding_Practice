@@ -2,7 +2,6 @@ https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/descr
 
 
 import java.util.HashMap;
-
 public class Solution {
     public int takeCharacters(String s, int k) {
         if (k == 0) return 0;
