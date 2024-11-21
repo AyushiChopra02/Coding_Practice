@@ -1,0 +1,51 @@
+https://leetcode.com/problems/count-unguarded-cells-in-the-grid/description/?envType=daily-question&envId=2024-11-21
+
+
+import java.util.*;
+
+public class Solution {
+    
+    private String posKey(int row, int col) {
+        return row + "," + col;
+    }
+
+    public int countUnguarded(int m, int n, int[][] guards, int[][] walls) {
+    
+        Set<String> guardSet = new HashSet<>();
+        Set<String> wallSet = new HashSet<>();
+        Set<String> guardedSet = new HashSet<>();
+        for (int[] guard : guards) {
+            guardSet.add(posKey(guard[0], guard[1]));
+        }
+        for (int[] wall : walls) {
+            wallSet.add(posKey(wall[0], wall[1]));
+        }
+        int[][] directions = { {-1, 0}, {1, 0}, {0, -1}, {0, 1} };
+
+
+        for (int[] guard : guards) {
+            for (int[] dir : directions) {
+                int x = guard[0];
+                int y = guard[1];
+                while (true) {
+                    x += dir[0];
+                    y += dir[1];
+                    String pos = posKey(x, y);
+
+                    // Stop if out of bounds, hits a wall, or another guard
+                    if (x < 0 || x >= m || y < 0 || y >= n || wallSet.contains(pos) || guardSet.contains(pos)) {
+                        break;
+                    }
+                    // Mark the cell as guarded
+                    guardedSet.add(pos);
+                }
+            }
+        }
+
+        
+        int totalCells = m * n;
+        int occupiedCells = guardedSet.size() + guardSet.size() + wallSet.size();
+
+        return totalCells - occupiedCells;
+    }
+}
