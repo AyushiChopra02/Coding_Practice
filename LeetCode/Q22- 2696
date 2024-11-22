@@ -1,9 +1,7 @@
 https://leetcode.com/problems/minimum-string-length-after-removing-substrings/?envType=daily-question&envId=2024-10-07
 
 
-
 import java.util.Stack;
-
 public class Solution {
     public int minLength(String s) {
         Stack<Character> stack = new Stack<>();
@@ -12,7 +10,7 @@ public class Solution {
             if (!stack.isEmpty()) {
                 char top = stack.peek();
                 if ((top == 'A' && c == 'B') || (top == 'C' && c == 'D')) {
-                    // If we find "AB" or "CD", pop the top character
+    
                     stack.pop();
                 } else {
 
