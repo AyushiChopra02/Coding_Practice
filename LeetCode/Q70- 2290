@@ -1,0 +1,57 @@
+https://leetcode.com/problems/minimum-obstacle-removal-to-reach-corner/description/?envType=daily-question&envId=2024-11-28
+
+import java.util.*;
+
+class Solution {
+    
+    int[][] dirs = new int[][] { { 0, 1 }, { 1, 0 }, { 0, -1 }, { -1, 0 } };
+    
+    static class State {
+        int row, col, removed; 
+        State(int r, int c, int removed) {
+            this.row = r;
+            this.col = c;
+            this.removed = removed;
+        }
+    }
+
+    public int minimumObstacles(int[][] grid) {
+        int R = grid.length;
+        int C = grid[0].length;
+        
+    
+        Queue<State> pq = new PriorityQueue<>((a, b) -> a.removed - b.removed);
+        pq.add(new State(0, 0, 0));
+        
+    
+        boolean[][] visited = new boolean[R][C];
+        visited[0][0] = true;
+
+    
+        while (!pq.isEmpty()) {
+            State state = pq.poll();
+            int x = state.row;
+            int y = state.col;
+            int removed = state.removed;
+
+            
+            if (x == R - 1 && y == C - 1) {
+                return removed;
+            }
+            for (int[] dir : dirs) {
+                int nx = x + dir[0];
+                int ny = y + dir[1];
+
+                if (nx >= 0 && nx < R && ny >= 0 && ny < C) {
+                    int newRemoved = removed + grid[nx][ny];
+                    if (!visited[nx][ny]) {
+                        visited[nx][ny] = true;
+                        pq.add(new State(nx, ny, newRemoved));
+                    }
+                }
+            }
+        }
+
+        return -1;
+    }
+}
