@@ -1,0 +1,57 @@
+https://leetcode.com/problems/minimum-time-to-visit-a-cell-in-a-grid/description/?envType=daily-question&envId=2024-11-29
+
+
+
+import java.util.*;
+
+class Solution {
+    private static final int[][] DIRECTIONS = {{0, 1}, {1, 0}, {0, -1}, {-1, 0}};
+
+    public int minimumTime(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+
+
+        if (grid[0][1] > 1 && grid[1][0] > 1) {
+            return -1; 
+        }
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>((a, b) -> Integer.compare(a[2], b[2]));
+        pq.offer(new int[]{0, 0, 0}); 
+
+        boolean[][] visited = new boolean[m][n];
+
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int row = current[0];
+            int col = current[1];
+            int time = current[2];
+
+        
+            if (row == m - 1 && col == n - 1) {
+                return time;
+            }
+
+            
+            if (visited[row][col]) {
+                continue;
+            }
+
+            visited[row][col] = true;
+
+            
+            for (int[] dir : DIRECTIONS) {
+                int newRow = row + dir[0];
+                int newCol = col + dir[1];
+
+                if (newRow >= 0 && newRow < m && newCol >= 0 && newCol < n && !visited[newRow][newCol]) {
+                    int waitTime = Math.max(0, (grid[newRow][newCol] - time + 1) % 2);
+                    int nextTime = Math.max(time + 1, grid[newRow][newCol] + waitTime);
+                    pq.offer(new int[]{newRow, newCol, nextTime});
+                }
+            }
+        }
+
+        return -1; 
+    }
+}
