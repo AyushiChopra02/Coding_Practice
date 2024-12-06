@@ -1,0 +1,46 @@
+https://leetcode.com/problems/maximum-number-of-integers-to-choose-from-a-range-i/description/?envType=daily-question&envId=2024-12-06
+
+import java.util.HashSet;
+import java.util.Set;
+
+public class Solution {
+    public int maxCount(int[] banned, int n, int maxSum) {
+        
+        Set<Integer> bannedSet = new HashSet<>();
+        for (int num : banned) {
+            bannedSet.add(num);
+        }
+
+        int count = 0;  
+        int currentSum = 0;
+
+
+        for (int i = 1; i <= n; i++) {
+        
+            if (bannedSet.contains(i) || currentSum + i > maxSum) {
+                continue;
+            }
+            
+            currentSum += i;
+            count++;
+        }
+
+        return count;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Example 1
+        int[] banned1 = {1, 6, 5};
+        System.out.println(solution.maxCount(banned1, 5, 6)); // Output: 2
+
+        // Example 2
+        int[] banned2 = {1, 2, 3, 4, 5, 6, 7};
+        System.out.println(solution.maxCount(banned2, 8, 1)); // Output: 0
+
+        // Example 3
+        int[] banned3 = {11};
+        System.out.println(solution.maxCount(banned3, 7, 50)); // Output: 7
+    }
+}
