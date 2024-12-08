@@ -1,0 +1,39 @@
+https://leetcode.com/problems/two-best-non-overlapping-events/description/?envType=daily-question&envId=2024-12-08
+
+import java.util.*;
+
+public class Solution {
+    public int maxTwoEvents(int[][] events) {
+        Arrays.sort(events, (a, b) -> Integer.compare(a[1], b[1]));
+        int[] maxTillNow = new int[events.length];
+        maxTillNow[0] = events[0][2]; 
+
+        for (int i = 1; i < events.length; i++) {
+            maxTillNow[i] = Math.max(maxTillNow[i - 1], events[i][2]);
+        }
+
+        int maxSum = 0;
+
+        for (int i = 0; i < events.length; i++) {
+            int currentValue = events[i][2];
+
+            int left = 0, right = i - 1;
+            while (left <= right) {
+                int mid = left + (right - left) / 2;
+                if (events[mid][1] < events[i][0]) {
+                    left = mid + 1;
+                } else {
+                    right = mid - 1;
+                }
+            }
+
+            if (right >= 0) {
+                currentValue += maxTillNow[right];
+            }
+
+            maxSum = Math.max(maxSum, currentValue);
+        }
+
+        return maxSum;
+    }
+}
