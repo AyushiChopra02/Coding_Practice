@@ -9,7 +9,7 @@ class ListNode {
         next = null;
     }
 
-
+ 
     public static ListNode deserialize(String data) {
         String[] values = data.replaceAll("[\\[\\] ]", "").split(",");
         ListNode dummyHead = new ListNode(0);
