@@ -1,0 +1,39 @@
+https://leetcode.com/problems/find-score-of-an-array-after-marking-all-elements/?envType=daily-question&envId=2024-12-13
+
+
+import java.util.PriorityQueue;
+import java.util.Comparator;
+
+public class Solution {
+    public long findScore(int[] nums) {
+        int n = nums.length;
+        boolean[] marked = new boolean[n]; 
+        long score = 0; 
+
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(
+            Comparator.comparingInt((int[] pair) -> pair[0])
+                      .thenComparingInt(pair -> pair[1])
+        );
+
+        for (int i = 0; i < n; i++) {
+            minHeap.offer(new int[]{nums[i], i});
+        }
+
+        while (!minHeap.isEmpty()) {
+            int[] current = minHeap.poll();
+            int value = current[0];
+            int index = current[1];
+
+            if (marked[index]) continue;
+
+          
+            score += value;
+
+            marked[index] = true;
+            if (index > 0) marked[index - 1] = true; 
+            if (index < n - 1) marked[index + 1] = true;
+        }
+
+        return score;
+    }
+}
