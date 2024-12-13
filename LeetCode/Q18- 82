@@ -8,8 +8,6 @@ class ListNode {
         val = x;
         next = null;
     }
-
-   
     public static ListNode deserialize(String data) {
         if (data.equals("[]")) return null; 
 
