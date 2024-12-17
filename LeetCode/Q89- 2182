@@ -1,0 +1,66 @@
+https://leetcode.com/problems/construct-string-with-repeat-limit/description/?envType=daily-question&envId=2024-12-17
+
+
+import java.util.PriorityQueue;
+
+public class Solution {
+    public String repeatLimitedString(String s, int repeatLimit) {
+        // Step 1: Count frequency of each character
+        int[] freq = new int[26];
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        
+        // Step 2: Max heap to get the largest characters first
+        PriorityQueue<int[]> maxHeap = new PriorityQueue<>((a, b) -> b[0] - a[0]);
+        for (int i = 0; i < 26; i++) {
+            if (freq[i] > 0) {
+                maxHeap.offer(new int[]{i, freq[i]}); // Store [char index, frequency]
+            }
+        }
+        
+        StringBuilder result = new StringBuilder();
+        
+        while (!maxHeap.isEmpty()) {
+            int[] current = maxHeap.poll(); // Current largest character
+            int charIndex = current[0];
+            int charFreq = current[1];
+            
+            // Determine how many times we can use the current character
+            int count = Math.min(charFreq, repeatLimit);
+            
+            // Append the current character 'count' times
+            for (int i = 0; i < count; i++) {
+                result.append((char) ('a' + charIndex));
+            }
+            
+            charFreq -= count; // Update the remaining frequency
+            
+            if (charFreq > 0) {
+                // If the current character cannot be used further, we need the next largest character
+                if (!maxHeap.isEmpty()) {
+                    int[] next = maxHeap.poll(); // Get next largest character
+                    int nextCharIndex = next[0];
+                    int nextCharFreq = next[1];
+                    
+                    // Append one occurrence of the next largest character
+                    result.append((char) ('a' + nextCharIndex));
+                    nextCharFreq--;
+                    
+                    // Put the next character back if it still has remaining frequency
+                    if (nextCharFreq > 0) {
+                        maxHeap.offer(new int[]{nextCharIndex, nextCharFreq});
+                    }
+                    
+                    // Put the current character back into the heap with updated frequency
+                    maxHeap.offer(new int[]{charIndex, charFreq});
+                } else {
+                    // No characters left to break the sequence
+                    break;
+                }
+            }
+        }
+        
+        return result.toString();
+    }
+}
