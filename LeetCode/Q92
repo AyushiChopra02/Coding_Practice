@@ -1,0 +1,40 @@
+𝐅𝐢𝐧𝐝 𝐭𝐡𝐞 𝐥𝐚𝐫𝐠𝐞𝐬𝐭 𝐯𝐚𝐥𝐢𝐝 𝐬𝐮𝐛𝐬𝐭𝐫𝐢𝐧𝐠?
+
+import java.util.*;
+
+public class Dec {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+       
+        int k = sc.nextInt();
+        String s = sc.next();
+
+        TreeMap<Character, Integer> charCount = new TreeMap<>();
+        int start = 0, maxLength = 0, maxStart = 0;
+
+        for (int end = 0; end < s.length(); end++) {
+            char c = s.charAt(end);
+            charCount.put(c, charCount.getOrDefault(c, 0) + 1);
+
+  
+            while (charCount.lastKey() - charCount.firstKey() > k) {
+                char leftChar = s.charAt(start);
+                charCount.put(leftChar, charCount.get(leftChar) - 1);
+                if (charCount.get(leftChar) == 0) {
+                    charCount.remove(leftChar);
+                }
+                start++;
+            }
+
+            if (end - start + 1 > maxLength) {
+                maxLength = end - start + 1;
+                maxStart = start;
+            }
+        }
+
+        String largestValidSubstring = s.substring(maxStart, maxStart + maxLength);
+        System.out.println("Largest valid substring length: " + maxLength);
+        System.out.println("Largest valid substring: " + largestValidSubstring);
+    }
+}
