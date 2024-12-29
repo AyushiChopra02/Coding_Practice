@@ -1,0 +1,28 @@
+https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/?envType=daily-question&envId=2024-12-29
+
+import java.util.*;
+
+public class Solution {
+    public int numWays(String[] words, String target) {
+        int MOD = 1_000_000_007;
+        int m = words[0].length();
+        int n = target.length();
+        int[][] freq = new int[26][m];
+        for (String word : words) {
+            for (int i = 0; i < m; i++) {
+                freq[word.charAt(i) - 'a'][i]++;
+            }
+        }
+        long[] dp = new long[n + 1];
+        dp[0] = 1; 
+        for (int i = 0; i < m; i++) {
+            for (int j = n - 1; j >= 0; j--) {
+                char targetChar = target.charAt(j);
+                dp[j + 1] += dp[j] * freq[targetChar - 'a'][i];
+                dp[j + 1] %= MOD;
+            }
+        }
+
+        return (int) dp[n];
+    }
+}
