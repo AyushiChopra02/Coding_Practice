@@ -1,0 +1,26 @@
+https://leetcode.com/problems/count-ways-to-build-good-strings/description/?envType=daily-question&envId=2024-12-30
+
+
+class Solution {
+    public int countGoodStrings(int low, int high, int zero, int one) {
+        int mod = 1_000_000_007;
+        int[] dp = new int[high + 1];
+        dp[0] = 1; 
+
+        for (int length = 1; length <= high; length++) {
+            if (length - zero >= 0) {
+                dp[length] = (dp[length] + dp[length - zero]) % mod;
+            }
+            if (length - one >= 0) {
+                dp[length] = (dp[length] + dp[length - one]) % mod;
+            }
+        }
+
+        int count = 0;
+        for (int i = low; i <= high; i++) {
+            count = (count + dp[i]) % mod;
+        }
+
+        return count;
+    }
+}
