@@ -1,0 +1,49 @@
+https://leetcode.com/problems/shifting-letters-ii/description/?envType=daily-question&envId=2025-01-05
+
+public class Solution {
+    public String shiftingLetters(String s, int[][] shifts) {
+        int n = s.length();
+        int[] netShifts = new int[n + 1]; // Use n+1 to handle end+1 operations easily.
+
+        // Apply difference array logic based on the shifts
+        for (int[] shift : shifts) {
+            int start = shift[0];
+            int end = shift[1];
+            int direction = shift[2];
+
+            if (direction == 1) { // Forward shift
+                netShifts[start] += 1;
+                if (end + 1 < n) {
+                    netShifts[end + 1] -= 1;
+                }
+            } else { // Backward shift
+                netShifts[start] -= 1;
+                if (end + 1 < n) {
+                    netShifts[end + 1] += 1;
+                }
+            }
+        }
+
+        // Compute the cumulative shifts using prefix sum
+        int[] cumulativeShifts = new int[n];
+        int shift = 0;
+        for (int i = 0; i < n; i++) {
+            shift += netShifts[i];
+            cumulativeShifts[i] = shift;
+        }
+
+        // Build the resulting string
+        StringBuilder result = new StringBuilder();
+        for (int i = 0; i < n; i++) {
+            char c = s.charAt(i);
+            int effectiveShift = cumulativeShifts[i] % 26; // Mod 26 for wrapping around
+            if (effectiveShift < 0) { // Handle negative shifts
+                effectiveShift += 26;
+            }
+            char newChar = (char) ((c - 'a' + effectiveShift) % 26 + 'a');
+            result.append(newChar);
+        }
+
+        return result.toString();
+    }
+}
