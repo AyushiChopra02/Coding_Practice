@@ -1,0 +1,33 @@
+https://leetcode.com/problems/construct-k-palindrome-strings/description/?envType=daily-question&envId=2025-01-11
+
+import java.util.*;
+
+public class Solution {
+    public boolean canConstruct(String s, int k) {
+        if (k > s.length()) {
+            return false;
+        }
+
+        int[] charCount = new int[26];
+        for (char c : s.toCharArray()) {
+            charCount[c - 'a']++;
+        }
+
+        int oddCount = 0;
+        for (int count : charCount) {
+            if (count % 2 != 0) {
+                oddCount++;
+            }
+        }
+
+        return oddCount <= k;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        System.out.println(solution.canConstruct("annabelle", 2)); 
+        System.out.println(solution.canConstruct("leetcode", 3));  
+        System.out.println(solution.canConstruct("true", 4));     
+    }
+}
