@@ -1,0 +1,22 @@
+https://leetcode.com/problems/minimum-length-of-string-after-operations/description/?envType=daily-question&envId=2025-01-13
+
+class Solution {
+    public int minimumLength(String s) {
+        int[] freq = new int[26];
+        
+        for (char c : s.toCharArray()) {
+            freq[c - 'a']++;
+        }
+        
+        int length = 0;
+        for (int i = 0; i < 26; i++) {
+            if ((freq[i] & 1) == 1) { 
+                length += 1;
+            } else {
+                length += Math.min(2, freq[i]); 
+            }
+        }
+        
+        return length;
+    }
+}
