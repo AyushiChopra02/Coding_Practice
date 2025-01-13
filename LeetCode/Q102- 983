@@ -2,7 +2,6 @@ https://leetcode.com/problems/minimum-cost-for-tickets/description/
 
 
 import java.util.*;
-
 public class Solution {
     public int mincostTickets(int[] days, int[] costs) {
         int maxDay = 365;
