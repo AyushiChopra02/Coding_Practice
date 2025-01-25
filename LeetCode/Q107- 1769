@@ -12,11 +12,9 @@ public class Solution {
             balls += boxes.charAt(i) - '0'; 
             operations += balls; 
         }
-
         balls = 0; 
         operations = 0; 
 
-    
         for (int i = n - 1; i >= 0; i--) {
             answer[i] += operations;
             balls += boxes.charAt(i) - '0'; 
