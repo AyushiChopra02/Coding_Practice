@@ -1,0 +1,50 @@
+https://leetcode.com/problems/course-schedule-iv/?envType=daily-question&envId=2025-01-27
+
+import java.util.*;
+
+public class Solution {
+    public List<Boolean> checkIfPrerequisite(int num, int[][] pre, int[][] query) {
+        // Graph ko represent karne ke liye adj list banai
+        List<List<Integer>> adjList = new ArrayList<>();
+        for (int i = 0; i < num; i++) {
+            adjList.add(new ArrayList<>());
+        }
+        
+        for (int[] prer : pre) {
+            int u = prer[0];
+            int v = prer[1];
+            adjList.get(u).add(v); // Corrected line
+        }
+        
+        boolean[][] is = new boolean[num][num];
+        for (int i = 0; i < num; i++) {
+            boolean[] visited = new boolean[num];
+            dfs(i, adjList, visited, is);
+        }
+        
+        List<Boolean> result = new ArrayList<>();
+        for (int[] q : query) { // Changed from queries to q
+            int u = q[0];
+            int v = q[1];
+            result.add(is[u][v]); // Changed from isPrerequisite to is
+        }
+        
+        return result;
+    }
+    
+    private void dfs(int node, List<List<Integer>> adjList, boolean[] visited, boolean[][] isPrerequisite) {
+        Stack<Integer> stack = new Stack<>();
+        stack.push(node);
+        while (!stack.isEmpty()) {
+            int current = stack.pop();
+            if (visited[current]) continue;
+            visited[current] = true;
+            isPrerequisite[node][current] = true;
+            for (int neighbor : adjList.get(current)) {
+                if (!visited[neighbor]) {
+                    stack.push(neighbor);
+                }
+            }
+        }
+    }
+}
