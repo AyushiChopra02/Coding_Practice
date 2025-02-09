@@ -1,0 +1,25 @@
+https://leetcode.com/problems/count-number-of-bad-pairs/description/?envType=daily-question&envId=2025-02-09
+
+
+import java.util.HashMap;
+
+class Solution {
+    public long countBadPairs(int[] nums) {
+        HashMap<Integer, Integer> freqMap = new HashMap<>();
+        long goodPairs = 0;
+        int n = nums.length;
+        
+        for (int i = 0; i < n; i++) {
+            int diff = nums[i] - i;
+            
+            // Count the number of good pairs with the same diff
+            goodPairs += freqMap.getOrDefault(diff, 0);
+            
+            // Update the frequency map
+            freqMap.put(diff, freqMap.getOrDefault(diff, 0) + 1);
+        }
+        
+        long totalPairs = (long) n * (n - 1) / 2;
+        return totalPairs - goodPairs; // Bad pairs = Total pairs - Good pairs
+    }
+}
