@@ -1,0 +1,31 @@
+https://leetcode.com/problems/product-of-the-last-k-numbers/description/?envType=daily-question&envId=2025-02-14
+
+
+import java.util.*;
+
+class ProductOfNumbers {
+    private List<Integer> prefixProduct;
+    private int lastZeroIndex;
+
+    public ProductOfNumbers() {
+        prefixProduct = new ArrayList<>();
+        prefixProduct.add(1); // Initialize with 1 for easier division
+        lastZeroIndex = -1; // No zero encountered initially
+    }
+
+    public void add(int num) {
+        if (num == 0) {
+            prefixProduct.clear();
+            prefixProduct.add(1); // Reset prefixProduct
+            lastZeroIndex = prefixProduct.size() - 1;
+        } else {
+            prefixProduct.add(prefixProduct.get(prefixProduct.size() - 1) * num);
+        }
+    }
+
+    public int getProduct(int k) {
+        int size = prefixProduct.size();
+        if (k >= size) return 0; // If k exceeds the available elements, return 0
+        return prefixProduct.get(size - 1) / prefixProduct.get(size - 1 - k);
+    }
+}
