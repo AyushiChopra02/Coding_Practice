@@ -1,0 +1,36 @@
+https://leetcode.com/problems/find-the-punishment-number-of-an-integer/description/?envType=daily-question&envId=2025-02-15
+
+class Solution {
+    public int punishmentNumber(int n) {
+        int sum = 0;
+        for (int i = 1; i <= n; i++) {
+            int square = i * i;
+            if (canPartition(Integer.toString(square), 0, i, 0)) {
+                sum += square;
+            }
+        }
+        return sum;
+    }
+
+    private boolean canPartition(String s, int index, int target, int currentSum) {
+        if (index == s.length()) {
+            return currentSum == target;
+        }
+
+        int num = 0;
+        for (int j = index; j < s.length(); j++) {
+            num = num * 10 + (s.charAt(j) - '0');  // Extract number
+            if (currentSum + num > target) break;  // Prune unnecessary calls
+            if (canPartition(s, j + 1, target, currentSum + num)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        System.out.println(sol.punishmentNumber(10)); 
+        System.out.println(sol.punishmentNumber(37));
+    }
+}
