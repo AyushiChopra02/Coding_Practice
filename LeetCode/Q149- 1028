@@ -1,0 +1,56 @@
+https://leetcode.com/problems/recover-a-tree-from-preorder-traversal/description/?envType=daily-question&envId=2025-02-22
+
+
+import java.util.*;
+
+class Solution {
+    public TreeNode recoverFromPreorder(String traversal) {
+        Stack<TreeNode> stack = new Stack<>();
+        int i = 0, n = traversal.length();
+
+        while (i < n) {
+            int level = 0;
+
+            // Count dashes to determine the depth
+            while (i < n && traversal.charAt(i) == '-') {
+                level++;
+                i++;
+            }
+
+            // Extract the node value
+            int value = 0;
+            while (i < n && Character.isDigit(traversal.charAt(i))) {
+                value = value * 10 + (traversal.charAt(i) - '0');
+                i++;
+            }
+
+            // Create a new node
+            TreeNode node = new TreeNode(value);
+
+            // If stack size > depth, pop to go back to the parent level
+            while (stack.size() > level) {
+                stack.pop();
+            }
+
+            // Attach node to the parent
+            if (!stack.isEmpty()) {
+                TreeNode parent = stack.peek();
+                if (parent.left == null) {
+                    parent.left = node;  // Left child
+                } else {
+                    parent.right = node; // Right child
+                }
+            }
+
+            // Push the current node to the stack
+            stack.push(node);
+        }
+
+        // Root is the first node we pushed to the stack
+        while (stack.size() > 1) {
+            stack.pop();
+        }
+
+        return stack.peek();
+    }
+}
