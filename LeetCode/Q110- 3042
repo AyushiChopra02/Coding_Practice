@@ -13,7 +13,7 @@ class Solution {
             }
         }
 
-        return count;
+        return count; 
     }
 
     private boolean isPrefixAndSuffix(String str1, String str2) {
