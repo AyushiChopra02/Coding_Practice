@@ -1,0 +1,82 @@
+https://leetcode.com/problems/most-profitable-path-in-a-tree/description/?envType=daily-question&envId=2025-02-24
+
+import java.util.*;
+
+class Solution {
+    public int mostProfitablePath(int[][] edges, int bob, int[] amount) {
+        int n = amount.length;
+
+        // Step 1: Build the tree
+        List<List<Integer>> tree = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            tree.add(new ArrayList<>());
+        }
+
+        for (int[] edge : edges) {
+            tree.get(edge[0]).add(edge[1]);
+            tree.get(edge[1]).add(edge[0]);
+        }
+
+        // Step 2: Find the path from Bob to root (0)
+        int[] bobPath = new int[n];
+        Arrays.fill(bobPath, -1);
+        findBobPath(tree, bob, 0, -1, 0, bobPath);
+
+        // Step 3: Calculate the maximum profit Alice can get
+        return dfs(tree, amount, bobPath, 0, -1, 0);
+    }
+
+    // DFS to find Bob's path to the root (0)
+    private boolean findBobPath(List<List<Integer>> tree, int current, int target, int parent, int depth, int[] bobPath) {
+        bobPath[current] = depth;
+
+        if (current == target) return true;
+
+        for (int neighbor : tree.get(current)) {
+            if (neighbor == parent) continue;
+            if (findBobPath(tree, neighbor, target, current, depth + 1, bobPath)) return true;
+        }
+
+        bobPath[current] = -1; // Reset if this path does not lead to Bob
+        return false;
+    }
+
+    // DFS to find the maximum profit Alice can get
+    private int dfs(List<List<Integer>> tree, int[] amount, int[] bobPath, int current, int parent, int depth) {
+        int maxProfit = Integer.MIN_VALUE;
+
+        // Explore all child nodes
+        for (int neighbor : tree.get(current)) {
+            if (neighbor == parent) continue;
+            maxProfit = Math.max(maxProfit, dfs(tree, amount, bobPath, neighbor, current, depth + 1));
+        }
+
+        // If no children, it's a leaf node
+        if (maxProfit == Integer.MIN_VALUE) maxProfit = 0;
+
+        // Adjust amount if both Alice and Bob reach simultaneously
+        if (bobPath[current] == -1 || depth < bobPath[current]) {
+            // Only Alice reaches here
+            maxProfit += amount[current];
+        } else if (depth == bobPath[current]) {
+            // Both reach at the same time
+            maxProfit += amount[current] / 2;
+        }
+
+        return maxProfit;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        int[][] edges1 = {{0, 1}, {1, 2}, {1, 3}, {3, 4}};
+        int bob1 = 3;
+        int[] amount1 = {-2, 4, 2, -4, 6};
+        System.out.println(solution.mostProfitablePath(edges1, bob1, amount1)); // Output: 6
+
+        int[][] edges2 = {{0, 1}};
+        int bob2 = 1;
+        int[] amount2 = {-7280, 2350};
+        System.out.println(solution.mostProfitablePath(edges2, bob2, amount2)); // Output: -7280
+    }
+}
