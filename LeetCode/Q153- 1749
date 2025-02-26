@@ -1,0 +1,30 @@
+https://leetcode.com/problems/maximum-absolute-sum-of-any-subarray/description/?envType=daily-question&envId=2025-02-26
+
+class Solution {
+    public int maxAbsoluteSum(int[] nums) {
+        int maxSum = 0;  // For maximum subarray sum
+        int minSum = 0;  // For minimum subarray sum
+        
+        int currentMax = 0;
+        int currentMin = 0;
+        
+        for (int num : nums) {
+            // Update max subarray sum
+            currentMax += num;
+            maxSum = Math.max(maxSum, currentMax);
+            if (currentMax < 0) {
+                currentMax = 0; // Reset if negative
+            }
+            
+            // Update min subarray sum
+            currentMin += num;
+            minSum = Math.min(minSum, currentMin);
+            if (currentMin > 0) {
+                currentMin = 0; // Reset if positive
+            }
+        }
+        
+        // Return the maximum absolute sum
+        return Math.max(maxSum, Math.abs(minSum));
+    }
+}
