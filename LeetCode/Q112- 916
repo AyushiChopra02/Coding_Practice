@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Solution {
     public List<String> wordSubsets(String[] words1, String[] words2) {
-        
+         
         int[] maxFreq = new int[26];
         for (String word : words2) {
             int[] currentFreq = new int[26];
