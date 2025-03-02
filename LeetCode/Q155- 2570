@@ -1,0 +1,42 @@
+https://leetcode.com/problems/merge-two-2d-arrays-by-summing-values/description/?envType=daily-question&envId=2025-03-02
+
+import java.util.*;
+
+class Solution {
+    public int[][] mergeArrays(int[][] nums1, int[][] nums2) {
+        Map<Integer, Integer> map = new TreeMap<>();
+
+        // Add all elements from nums1 to the map
+        for (int[] num : nums1) {
+            map.put(num[0], map.getOrDefault(num[0], 0) + num[1]);
+        }
+
+        // Add all elements from nums2 to the map
+        for (int[] num : nums2) {
+            map.put(num[0], map.getOrDefault(num[0], 0) + num[1]);
+        }
+
+        // Convert map entries to a 2D array
+        int[][] result = new int[map.size()][2];
+        int index = 0;
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            result[index][0] = entry.getKey();
+            result[index][1] = entry.getValue();
+            index++;
+        }
+
+        return result;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[][] nums1 = {{1, 2}, {2, 3}, {4, 5}};
+        int[][] nums2 = {{1, 4}, {3, 2}, {4, 1}};
+
+        int[][] result = solution.mergeArrays(nums1, nums2);
+
+        for (int[] row : result) {
+            System.out.println(Arrays.toString(row));
+        }
+    }
+}
