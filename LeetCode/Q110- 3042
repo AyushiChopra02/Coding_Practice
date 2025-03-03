@@ -10,7 +10,7 @@ class Solution {
                 if (isPrefixAndSuffix(words[i], words[j])) {
                     count++;
                 }
-            }
+            } 
         }
 
         return count; 
