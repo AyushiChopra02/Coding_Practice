@@ -1,0 +1,23 @@
+https://leetcode.com/problems/check-if-number-is-a-sum-of-powers-of-three/?envType=daily-question&envId=2025-03-04
+
+class Solution {
+    public boolean checkPowersOfThree(int n) {
+        while (n > 0) {
+            int remainder = n % 3;
+            // If remainder is 2, it's impossible to represent it as a sum of powers of 3
+            if (remainder == 2) {
+                return false;
+            }
+            n /= 3;
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        System.out.println(solution.checkPowersOfThree(12)); // true
+        System.out.println(solution.checkPowersOfThree(91)); // true
+        System.out.println(solution.checkPowersOfThree(21)); // false
+    }
+}
