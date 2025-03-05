@@ -1,7 +1,7 @@
 https://leetcode.com/problems/word-subsets/description/
 
 import java.util.*;
- 
+  
 public class Solution {
     public List<String> wordSubsets(String[] words1, String[] words2) {
          
