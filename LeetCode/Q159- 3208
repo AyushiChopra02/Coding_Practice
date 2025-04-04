@@ -1,7 +1,7 @@
 https://leetcode.com/problems/alternating-groups-ii/description/?envType=daily-question&envId=2025-03-09
 
 
-class Solution {
+class Solution { 
     public int numberOfAlternatingGroups(int[] colors, int k) {
         int n = colors.length;
         int count = 0;
