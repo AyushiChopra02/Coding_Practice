@@ -1,7 +1,7 @@
 https://leetcode.com/problems/minimum-cost-walk-in-weighted-graph/description/?envType=daily-question&envId=2025-03-20
 
 
-class Solution {
+class Solution { 
     private int findRoot(int[] parent, int node) {
         if (parent[node] != node) {
             parent[node] = findRoot(parent, parent[node]);
