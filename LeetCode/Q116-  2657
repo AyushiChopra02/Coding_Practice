@@ -3,7 +3,7 @@ https://leetcode.com/problems/find-the-prefix-common-array-of-two-arrays/?envTyp
 import java.util.HashSet;
 
 class Solution {
-    public int[] findThePrefixCommonArray(int[] A, int[] B) {
+    public int[] findThePrefixCommonArray(int[] A, int[] B) { 
         int n = A.length;
         int[] C = new int[n];
         HashSet<Integer> seenInA = new HashSet<>();
