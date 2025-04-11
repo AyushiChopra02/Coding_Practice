@@ -1,6 +1,6 @@
 https://leetcode.com/problems/shifting-letters-ii/description/?envType=daily-question&envId=2025-01-05
      
-public class Solution {
+public class Solution { 
     public String shiftingLetters(String s, int[][] shifts) { 
         int n = s.length();
         int[] netShifts = new int[n + 1]; // Use n+1 to handle end+1 operations easily.
