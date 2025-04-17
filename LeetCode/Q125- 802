@@ -2,7 +2,7 @@ https://leetcode.com/problems/find-eventual-safe-states/description/?envType=dai
 
 import java.util.ArrayList;
 import java.util.List;
-
+ 
 public class Solution {
     public List<Integer> eventualSafeNodes(int[][] graph) {
         int n = graph.length;
