@@ -1,0 +1,58 @@
+https://leetcode.com/problems/prime-subtraction-operation/description/?envType=daily-question&envId=2024-11-11
+
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Solution {
+    public boolean primeSubOperation(int[] nums) {
+        int n = nums.length;
+        
+       
+        List<Integer> primes = getPrimesUpTo(1000);
+        
+      
+        for (int i = n - 1; i > 0; i--) {
+            if (nums[i] <= nums[i - 1]) {
+            
+                boolean canReduce = false;
+                for (int p : primes) {
+                    if (p < nums[i - 1] && nums[i - 1] - p < nums[i]) {
+                        nums[i - 1] -= p;
+                        canReduce = true;
+                        break;
+                    }
+                }
+                if (!canReduce) {
+                    return false;
+                }
+            }
+        }
+        
+        return true;
+    }
+    
+    
+    private List<Integer> getPrimesUpTo(int limit) {
+        boolean[] isPrime = new boolean[limit + 1];
+        for (int i = 2; i <= limit; i++) {
+            isPrime[i] = true;
+        }
+        for (int i = 2; i * i <= limit; i++) {
+            if (isPrime[i]) {
+                for (int j = i * i; j <= limit; j += i) {
+                    isPrime[j] = false;
+                }
+            }
+        }
+        
+        List<Integer> primes = new ArrayList<>();
+        for (int i = 2; i <= limit; i++) {
+            if (isPrime[i]) {
+                primes.add(i);
+            }
+        }
+        
+        return primes;
+    }
+}

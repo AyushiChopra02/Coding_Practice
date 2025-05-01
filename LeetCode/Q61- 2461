@@ -1,0 +1,57 @@
+https://leetcode.com/problems/maximum-sum-of-distinct-subarrays-with-length-k/description/?envType=daily-question&envId=2024-11-19
+ 
+
+import java.util.HashSet;
+
+public class Solution {
+    public long maximumSubarraySum(int[] nums, int k) {
+        long maxSum = 0;
+        long currentSum = 0;
+        HashSet<Integer> windowElements = new HashSet<>();
+        int start = 0;
+
+        for (int end = 0; end < nums.length; end++) {
+            
+            if (end - start + 1 > k) {
+                currentSum -= nums[start];
+                windowElements.remove(nums[start]);
+                start++;
+            }
+
+            if (!windowElements.contains(nums[end])) {
+                windowElements.add(nums[end]);
+                currentSum += nums[end];
+
+            
+                if (end - start + 1 == k) {
+                    maxSum = Math.max(maxSum, currentSum);
+                }
+            } else {
+            
+                while (nums[start] != nums[end]) {
+                    currentSum -= nums[start];
+                    windowElements.remove(nums[start]);
+                    start++;
+                }
+        
+                currentSum -= nums[start];
+                windowElements.remove(nums[start]);
+                start++;
+                end--; 
+            }
+        }
+
+        return maxSum;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        int[] nums1 = {1, 5, 4, 2, 9, 9, 9};
+        int k1 = 3;
+        System.out.println("Output: " + solution.maximumSubarraySum(nums1, k1)); // Output: 15
+
+        int[] nums2 = {4, 4, 4};
+        int k2 = 3;
+        System.out.println("Output: " + solution.maximumSubarraySum(nums2, k2)); // Output: 0
+    }
+}

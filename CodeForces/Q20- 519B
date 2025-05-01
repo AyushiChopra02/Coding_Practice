@@ -1,0 +1,28 @@
+https://codeforces.com/problemset/problem/519/B
+
+import java.util.Scanner;
+ 
+public class Void {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int t = sc.nextInt();
+        int it = t - 2;
+        long sum = 0;
+        long pre = 0;
+        int c = 0;
+        
+        while (t-- >= it) {
+            for (int i = 1; i <= (t + 1); i++) {
+                sum = sum + sc.nextLong();
+            }
+            if (c == 0) {
+                pre = sum;
+            } else {
+                System.out.println(pre - sum);
+                pre = sum;
+            }
+            sum = 0;
+            c++;
+        }
+    }
+}

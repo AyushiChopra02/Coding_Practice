@@ -1,0 +1,53 @@
+https://leetcode.com/problems/minimum-cost-to-make-at-least-one-valid-path-in-a-grid/description/?envType=daily-question&envId=2025-01-18
+
+
+import java.util.*;
+
+public class Solution {
+    private static final int[][] DIRECTIONS = {
+        {0, 1},  
+        {0, -1}, 
+        {1, 0}, 
+        {-1, 0}  
+    };
+
+    public int minCost(int[][] grid) {
+        int m = grid.length;
+        int n = grid[0].length;
+        
+        Deque<int[]> deque = new ArrayDeque<>();
+        int[][] cost = new int[m][n];
+        
+        for (int[] row : cost) {
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        
+        deque.offer(new int[]{0, 0}); 
+        cost[0][0] = 0;
+
+        while (!deque.isEmpty()) {
+            int[] current = deque.pollFirst();
+            int x = current[0], y = current[1];
+            int currentCost = cost[x][y];
+            
+            for (int dir = 0; dir < 4; dir++) {
+                int newX = x + DIRECTIONS[dir][0];
+                int newY = y + DIRECTIONS[dir][1];
+                
+                if (newX >= 0 && newX < m && newY >= 0 && newY < n) {
+                    int nextCost = currentCost + (dir + 1 == grid[x][y] ? 0 : 1);
+                    if (nextCost < cost[newX][newY]) {
+                        cost[newX][newY] = nextCost;
+                        if (dir + 1 == grid[x][y]) {
+                            deque.offerFirst(new int[]{newX, newY}); 
+                        } else {
+                            deque.offerLast(new int[]{newX, newY}); 
+                        }
+                    }
+                }
+            }
+        }
+        
+        return cost[m - 1][n - 1];
+    }
+}

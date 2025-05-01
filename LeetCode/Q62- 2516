@@ -1,0 +1,35 @@
+https://leetcode.com/problems/take-k-of-each-character-from-left-and-right/description/?envType=daily-question&envId=2024-11-20
+
+
+import java.util.HashMap;
+public class Solution {
+    public int takeCharacters(String s, int k) {
+        if (k == 0) return 0;
+        int n = s.length();
+        HashMap<Character, Integer> freq = new HashMap<>();
+        freq.put('a', 0);
+        freq.put('b', 0);
+        freq.put('c', 0);
+        for (char c : s.toCharArray()) {
+            freq.put(c, freq.get(c) + 1);
+        }
+        for (char c : "abc".toCharArray()) {
+            if (freq.get(c) < k) return -1;
+        }
+        int maxWindowLength = 0;
+        int[] count = new int[3]; 
+        int left = 0;
+
+        for (int right = 0; right < n; right++) {
+            count[s.charAt(right) - 'a']++;
+            while (count[0] + k > freq.get('a') ||
+                   count[1] + k > freq.get('b') ||
+                   count[2] + k > freq.get('c')) {
+                count[s.charAt(left) - 'a']--;
+                left++;
+            }
+            maxWindowLength = Math.max(maxWindowLength, right - left + 1);
+        }
+        return n - maxWindowLength;
+    }
+}

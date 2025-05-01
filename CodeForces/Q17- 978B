@@ -1,0 +1,24 @@
+https://codeforces.com/problemset/problem/978/B
+
+import java.util.Scanner;
+ 
+public class Problem978B {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt();
+        String s = sc.next();
+    
+        String xxx = "xxx";
+        if (s.contains(xxx)) {
+        
+            while (s.contains(xxx)) {
+                s = s.replaceAll(xxx, "xx");
+            }
+            
+            System.out.println(n - s.length());
+        } else {
+        
+            System.out.println("0");
+        }
+    }
+}

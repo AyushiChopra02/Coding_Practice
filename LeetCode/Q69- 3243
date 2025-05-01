@@ -1,0 +1,73 @@
+https://leetcode.com/problems/shortest-distance-after-road-addition-queries-i/description/?envType=daily-question&envId=2024-11-27
+
+ 
+import java.util.*;
+
+class Solution {
+    public int[] shortestDistanceAfterQueries(int n, int[][] queries) {
+
+        List<int[]>[] graph = new ArrayList[n];
+        for (int i = 0; i < n; i++) {
+            graph[i] = new ArrayList<>();
+        }
+
+
+        for (int i = 0; i < n - 1; i++) {
+            graph[i].add(new int[]{i + 1, 1});
+        }
+
+        int[] result = new int[queries.length];
+
+
+        for (int q = 0; q < queries.length; q++) {
+            int u = queries[q][0];
+            int v = queries[q][1];
+            
+            // Add the new edge from u to v
+            graph[u].add(new int[]{v, 1});
+
+            result[q] = dijkstra(graph, n, 0, n - 1);
+        }
+
+        return result;
+    }
+
+    private int dijkstra(List<int[]>[] graph, int n, int start, int target) {
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        pq.offer(new int[]{0, start}); 
+
+        int[] dist = new int[n];
+        Arrays.fill(dist, Integer.MAX_VALUE);
+        dist[start] = 0;
+
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int currentDist = current[0];
+            int node = current[1];
+
+            if (node == target) {
+                return currentDist;
+            }
+
+       
+            if (currentDist > dist[node]) {
+                continue;
+            }
+
+
+            for (int[] neighbor : graph[node]) {
+                int nextNode = neighbor[0];
+                int weight = neighbor[1];
+                int newDist = currentDist + weight;
+
+                if (newDist < dist[nextNode]) {
+                    dist[nextNode] = newDist;
+                    pq.offer(new int[]{newDist, nextNode});
+                }
+            }
+        }
+
+        return -1; 
+    }
+}

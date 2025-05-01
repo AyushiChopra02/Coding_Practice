@@ -1,0 +1,48 @@
+https://leetcode.com/problems/divide-intervals-into-minimum-number-of-groups/description/?envType=daily-question&envId=2024-10-12
+
+import java.util.*;
+
+public class Solution {
+    public int minGroups(int[][] intervals) {
+      
+        List<int[]> events = new ArrayList<>();
+        
+        for (int[] interval : intervals) {
+          
+            events.add(new int[]{interval[0], 1});  
+         
+            events.add(new int[]{interval[1] + 1, -1}); 
+        }
+        
+
+        Collections.sort(events, (a, b) -> {
+            if (a[0] == b[0]) {
+                return a[1] - b[1];  
+            }
+            return a[0] - b[0];
+        });
+        
+        int maxGroups = 0;  // To track the maximum number of groups needed
+        int currentGroups = 0;  // Current number of active groups
+        
+        // Traverse the sorted events
+        for (int[] event : events) {
+            currentGroups += event[1];  // Add 1 for start, subtract 1 for end
+            maxGroups = Math.max(maxGroups, currentGroups);
+        }
+        
+        return maxGroups;
+    }
+    
+    public static void main(String[] args) {
+        Solution sol = new Solution();
+        
+        // Example 1
+        int[][] intervals1 = {{5, 10}, {6, 8}, {1, 5}, {2, 3}, {1, 10}};
+        System.out.println(sol.minGroups(intervals1));  // Output: 3
+        
+        // Example 2
+        int[][] intervals2 = {{1, 3}, {5, 6}, {8, 10}, {11, 13}};
+        System.out.println(sol.minGroups(intervals2));  // Output: 1
+    }
+}

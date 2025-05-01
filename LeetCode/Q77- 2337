@@ -1,0 +1,50 @@
+
+https://leetcode.com/problems/move-pieces-to-obtain-a-string/description/?envType=daily-question&envId=2024-12-05
+
+
+
+class Solution {
+    public boolean canChange(String start, String target) {
+        String startStripped = start.replace("_", "");
+        String targetStripped = target.replace("_", "");
+        if (!startStripped.equals(targetStripped)) {
+            return false;
+        }
+
+        int n = start.length();
+        int startPointer = 0, targetPointer = 0;
+
+        while (startPointer < n && targetPointer < n) {
+            
+            while (startPointer < n && start.charAt(startPointer) == '_') {
+                startPointer++;
+            }
+            while (targetPointer < n && target.charAt(targetPointer) == '_') {
+                targetPointer++;
+            }
+
+            if (startPointer < n && targetPointer < n) {
+                char startChar = start.charAt(startPointer);
+                char targetChar = target.charAt(targetPointer);
+                if (startChar != targetChar) {
+                    return false;
+                }
+
+                // Check movement constraints for 'L' and 'R'
+                if (startChar == 'L' && startPointer < targetPointer) {
+                    return false; // 'L' can only move to the left
+                }
+                if (startChar == 'R' && startPointer > targetPointer) {
+                    return false; // 'R' can only move to the right
+                }
+
+                // Move both pointers forward
+                startPointer++;
+                targetPointer++;
+            }
+        }
+
+        // Ensure no leftover non-'_' characters in either string
+        return true;
+    }
+}

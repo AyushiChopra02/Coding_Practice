@@ -1,0 +1,28 @@
+https://codeforces.com/problemset/problem/25/A
+
+import java.util.Scanner ;
+public class Problem225A{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int n= sc.nextInt();
+        int cntE=0;
+        int cntO=0;
+        int idxE=0; 
+        int idxO =0;
+      for(int i=0; i<n ; i++){
+            if((sc.nextInt() % 2)==0){
+                cntE++;
+                idxE=i;
+                
+            }else{
+                cntO++;
+                idxO=i;;
+            }
+        }
+        if(cntE==1){
+            System.out.println(idxE+1);
+        }else{
+            System.out.println(idxO+1);
+        }
+    }
+}

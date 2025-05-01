@@ -1,0 +1,51 @@
+https://leetcode.com/problems/partition-array-according-to-given-pivot/description/?envType=daily-question&envId=2025-03-03
+
+import java.util.*;
+
+class Solution {
+    public int[] pivotArray(int[] nums, int pivot) {
+        List<Integer> left = new ArrayList<>();
+        List<Integer> middle = new ArrayList<>();
+        List<Integer> right = new ArrayList<>();
+
+        // Separate numbers into three parts
+        for (int num : nums) {
+            if (num < pivot) {
+                left.add(num);
+            } else if (num == pivot) {
+                middle.add(num);
+            } else {
+                right.add(num);
+            }
+        }
+
+        // Combine the three parts
+        int index = 0;
+
+        for (int num : left) {
+            nums[index++] = num;
+        }
+
+        for (int num : middle) {
+            nums[index++] = num;
+        }
+
+        for (int num : right) {
+            nums[index++] = num;
+        }
+
+        return nums;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        int[] nums1 = {9, 12, 5, 10, 14, 3, 10};
+        int pivot1 = 10;
+        System.out.println(Arrays.toString(solution.pivotArray(nums1, pivot1)));
+
+        int[] nums2 = {-3, 4, 3, 2};
+        int pivot2 = 2;
+        System.out.println(Arrays.toString(solution.pivotArray(nums2, pivot2)));
+    }
+}

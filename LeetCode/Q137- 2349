@@ -1,0 +1,31 @@
+https://leetcode.com/problems/design-a-number-container-system/description/?envType=daily-question&envId=2025-02-08
+
+import java.util.*;
+
+class NumberContainers {
+    private Map<Integer, Integer> indexMap;  
+    private Map<Integer, TreeSet<Integer>> numberMap;
+
+    public NumberContainers() {
+        indexMap = new HashMap<>();
+        numberMap = new HashMap<>();
+    }
+
+    public void change(int index, int number) {
+        if (indexMap.containsKey(index)) {
+            int oldNumber = indexMap.get(index);
+            if (oldNumber != number) {
+                numberMap.get(oldNumber).remove(index);
+                if (numberMap.get(oldNumber).isEmpty()) {
+                    numberMap.remove(oldNumber);
+                }
+            }
+        }
+        indexMap.put(index, number);
+        numberMap.computeIfAbsent(number, k -> new TreeSet<>()).add(index);
+    }
+
+    public int find(int number) {
+        return numberMap.containsKey(number) && !numberMap.get(number).isEmpty() ? numberMap.get(number).first() : -1;
+    }
+}

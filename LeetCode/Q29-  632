@@ -1,0 +1,44 @@
+https://leetcode.com/problems/minimum-add-to-make-parentheses-valid/description/?envType=daily-question&envId=2024-10-09
+
+import java.util.*;
+
+public class Solution {
+    public int[] smallestRange(List<List<Integer>> nums) {
+        int k = nums.size();
+        PriorityQueue<int[]> minHeap = new PriorityQueue<>(Comparator.comparingInt(a -> nums.get(a[0]).get(a[1])));
+        
+        int maxElement = Integer.MIN_VALUE;
+        int rangeStart = 0, rangeEnd = Integer.MAX_VALUE;
+        
+        for (int i = 0; i < k; i++) {
+            int num = nums.get(i).get(0);
+            minHeap.offer(new int[]{i, 0});
+            maxElement = Math.max(maxElement, num);
+        }
+        
+    
+        while (true) {
+            
+            int[] minEntry = minHeap.poll();
+            int listIndex = minEntry[0];
+            int elementIndex = minEntry[1];
+            int currentMin = nums.get(listIndex).get(elementIndex);
+            
+            
+            if (maxElement - currentMin < rangeEnd - rangeStart) {
+                rangeStart = currentMin;
+                rangeEnd = maxElement;
+            }
+            
+            if (elementIndex + 1 < nums.get(listIndex).size()) {
+                int nextElement = nums.get(listIndex).get(elementIndex + 1);
+                minHeap.offer(new int[]{listIndex, elementIndex + 1});
+                maxElement = Math.max(maxElement, nextElement);
+            } else {
+                break; 
+            }
+        }
+        
+        return new int[]{rangeStart, rangeEnd};
+    }
+}

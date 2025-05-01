@@ -1,0 +1,28 @@
+https://leetcode.com/problems/minimum-operations-to-exceed-threshold-value-ii/?envType=daily-question&envId=2025-02-13
+
+
+import java.util.PriorityQueue;
+
+class Solution {
+    public int minOperations(int[] nums, int k) {
+        int n = nums.length;
+        if (n == 0) {
+            return 0;
+        }
+        PriorityQueue<Long> pq = new PriorityQueue<>(); 
+        for (int num : nums) {
+            pq.offer((long)num); 
+        }
+        int operations = 0;
+        while (!pq.isEmpty() && pq.peek() < k) {
+            long x = pq.poll();
+            if (pq.isEmpty()) return -1; 
+            long y = pq.poll();
+            long newVal = Math.min(x, y) * 2 + Math.max(x, y); 
+            pq.offer(newVal);
+            operations++;
+        }
+
+        return operations;
+    }
+}

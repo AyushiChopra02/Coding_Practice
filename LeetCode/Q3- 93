@@ -1,0 +1,55 @@
+https://leetcode.com/problems/restore-ip-addresses/description/
+
+import java.util.ArrayList;
+import java.util.List;
+
+class Solution {
+    public List<String> restoreIpAddresses(String s) {
+        List<String> res = new ArrayList<>();
+        int l = s.length();
+        StringBuilder ip = new StringBuilder();
+
+        // The length of each segment must be <= 3 because the maximum value 255 has 3 digits
+        for (int aL = 1; aL <= 3; aL++) {
+            for (int bL = 1; bL <= 3; bL++) {
+                for (int cL = 1; cL <= 3; cL++) {
+                    // dL = total length - lengths of the first three segments
+                    int dL = l - aL - bL - cL;
+
+                    // Check if dL is valid
+                    if (dL > 0 && dL <= 3) {
+                        // Extract values for A, B, C, and D
+                        int A = Integer.parseInt(s.substring(0, aL));
+                        int B = Integer.parseInt(s.substring(aL, aL + bL));
+                        int C = Integer.parseInt(s.substring(aL + bL, aL + bL + cL));
+                        int D = Integer.parseInt(s.substring(aL + bL + cL));
+
+                        // Ensure all segments are within the valid range (0-255) and no leading zero
+                        if (A <= 255 && B <= 255 && C <= 255 && D <= 255) {
+                            // Check to avoid numbers with leading zeros
+                            String strA = s.substring(0, aL);
+                            String strB = s.substring(aL, aL + bL);
+                            String strC = s.substring(aL + bL, aL + bL + cL);
+                            String strD = s.substring(aL + bL + cL);
+
+                            if (strA.equals(String.valueOf(A)) && strB.equals(String.valueOf(B)) &&
+                                strC.equals(String.valueOf(C)) && strD.equals(String.valueOf(D))) {
+                                
+                                ip.append(A).append(".").append(B).append(".").append(C).append(".").append(D);
+                                
+                                // Append only if the length matches the original string + 3 dots
+                                if (ip.length() == l + 3) {
+                                    res.add(ip.toString());
+                                }
+                                
+                                ip.setLength(0); // Clear the StringBuilder for the next iteration
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return res;
+    }
+}

@@ -1,0 +1,33 @@
+https://leetcode.com/problems/target-sum/description/?envType=daily-question&envId=2024-12-26
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        Map<String, Integer> memo = new HashMap<>();
+        return helper(nums, target, 0, 0, memo);
+    }
+    
+    private int helper(int[] nums, int target, int index, int currentSum, Map<String, Integer> memo) {
+        // Base case: if we reach the end of the array
+        if (index == nums.length) {
+            return currentSum == target ? 1 : 0;
+        }
+
+        // Memoization key
+        String key = index + "," + currentSum;
+        if (memo.containsKey(key)) {
+            return memo.get(key);
+        }
+
+        // Explore both possibilities: add and subtract the current number
+        int add = helper(nums, target, index + 1, currentSum + nums[index], memo);
+        int subtract = helper(nums, target, index + 1, currentSum - nums[index], memo);
+
+        // Store the result in the memo
+        memo.put(key, add + subtract);
+
+        return memo.get(key);
+    }
+}

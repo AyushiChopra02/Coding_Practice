@@ -1,0 +1,27 @@
+https://codeforces.com/problemset/problem/705/A
+
+import java.util.Scanner;
+public class Problem705A{
+public static void main(String[] args){
+    Scanner sc = new Scanner(System.in);
+    String odd = "I hate ";
+    String even = "I love ";
+    String end = "it";
+    String mid = "that ";
+    int n   = sc.nextInt();
+    String result = "";
+    for(int i=1 ; i<=n ; i++ ){
+        if(i%2 == 0){
+            result = result + even;
+        }else{
+            result = result + odd;
+        }if(i==n){
+            result = result + end;
+        }else{
+            result = result + mid;
+        }
+    }
+    result = result.trim();
+    System.out.println(result);
+}
+}

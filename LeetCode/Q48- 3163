@@ -1,0 +1,24 @@
+https://leetcode.com/problems/string-compression-iii/description/?envType=daily-question&envId=2024-11-04
+
+class Solution {
+    public String compressedString(String word) {
+        StringBuilder comp = new StringBuilder();
+        int i = 0;
+        
+        while (i < word.length()) {
+            char currentChar = word.charAt(i);
+            int count = 0;
+            
+            // Count up to 9 consecutive occurrences of currentChar
+            while (i < word.length() && word.charAt(i) == currentChar && count < 9) {
+                count++;
+                i++;
+            }
+            
+            // Append count and character to the result
+            comp.append(count).append(currentChar);
+        }
+        
+        return comp.toString();
+    }
+}

@@ -1,0 +1,40 @@
+https://leetcode.com/problems/most-beautiful-item-for-each-query/description/?envType=daily-question&envId=2024-11-12
+
+import java.util.Arrays;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class Solution {
+    public int[] maximumBeauty(int[][] items, int[] queries) {
+       
+        Arrays.sort(items, (a, b) -> Integer.compare(a[0], b[0]));
+
+    
+        TreeMap<Integer, Integer> priceToMaxBeauty = new TreeMap<>();
+        int currentMaxBeauty = 0;
+
+        for (int[] item : items) {
+            int price = item[0];
+            int beauty = item[1];
+            currentMaxBeauty = Math.max(currentMaxBeauty, beauty);
+            priceToMaxBeauty.put(price, currentMaxBeauty);
+        }
+
+        // Prepare the result array
+        int[] result = new int[queries.length];
+
+        // Answer each query using the TreeMap
+        for (int i = 0; i < queries.length; i++) {
+            Integer floorKey = priceToMaxBeauty.floorKey(queries[i]);
+            if (floorKey == null) {
+                // No item exists with a price <= queries[i]
+                result[i] = 0;
+            } else {
+                // Get the maximum beauty for the closest price <= queries[i]
+                result[i] = priceToMaxBeauty.get(floorKey);
+            }
+        }
+
+        return result;
+    }
+}

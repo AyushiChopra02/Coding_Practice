@@ -1,0 +1,50 @@
+https://leetcode.com/problems/special-array-ii/
+
+class Solution {
+    public boolean[] isArraySpecial(int[] nums, int[][] queries) {
+        int n = nums.length;
+        int m = queries.length;
+
+        // Handle the edge case where nums has only one element
+        if (n == 1) {
+            boolean[] result = new boolean[m];
+            for (int i = 0; i < m; i++) {
+                result[i] = true; // A single element subarray is always special
+            }
+            return result;
+        }
+
+        // Step 1: Create a parityMismatch array
+        int[] parityMismatch = new int[n - 1];
+        for (int i = 0; i < n - 1; i++) {
+            parityMismatch[i] = (nums[i] % 2 != nums[i + 1] % 2) ? 1 : 0;
+        }
+
+        // Step 2: Compute prefix sums for parityMismatch
+        int[] prefixSum = new int[n - 1];
+        prefixSum[0] = parityMismatch[0];
+        for (int i = 1; i < n - 1; i++) {
+            prefixSum[i] = prefixSum[i - 1] + parityMismatch[i];
+        }
+
+        // Step 3: Process each query
+        boolean[] result = new boolean[m];
+        for (int i = 0; i < m; i++) {
+            int from = queries[i][0];
+            int to = queries[i][1];
+
+            // Subarray of length 1 is always special
+            if (to == from) {
+                result[i] = true;
+                continue;
+            }
+
+            
+            int mismatches = prefixSum[to - 1] - (from > 0 ? prefixSum[from - 1] : 0);
+
+            result[i] = (mismatches == (to - from));
+        }
+
+        return result;
+    }
+}

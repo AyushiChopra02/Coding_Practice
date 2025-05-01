@@ -1,0 +1,51 @@
+https://leetcode.com/problems/count-the-number-of-fair-pairs/description/?envType=daily-question&envId=2025-04-19
+
+
+import java.util.Arrays;
+
+public class Solution {
+    public long countFairPairs(int[] nums, int lower, int upper) {
+        Arrays.sort(nums);  // Step 1: Sort the array
+        int n = nums.length;
+        long count = 0;  // Use long to handle large sums
+
+        // Step 2: Iterate over each element and find the valid range using binary search
+        for (int i = 0; i < n - 1; i++) {
+            int left = binarySearchLeft(nums, i + 1, n - 1, lower - nums[i]);
+            int right = binarySearchRight(nums, i + 1, n - 1, upper - nums[i]);
+            
+            if (left <= right) {
+                count += (right - left + 1);  // Add all pairs in the valid range
+            }
+        }
+        return count;
+    }
+
+    // Binary search to find the left bound of elements >= target
+    private int binarySearchLeft(int[] nums, int start, int end, int target) {
+        int left = start, right = end;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] < target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return left;
+    }
+
+    // Binary search to find the right bound of elements <= target
+    private int binarySearchRight(int[] nums, int start, int end, int target) {
+        int left = start, right = end;
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (nums[mid] <= target) {
+                left = mid + 1;
+            } else {
+                right = mid - 1;
+            }
+        }
+        return right;
+    }
+}

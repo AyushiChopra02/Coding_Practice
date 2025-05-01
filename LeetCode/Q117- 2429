@@ -1,0 +1,30 @@
+https://leetcode.com/problems/minimize-xor/description/?envType=daily-question&envId=2025-01-15
+
+class Solution {
+    public int minimizeXor(int num1, int num2) {
+     
+        int setBitsNum2 = Integer.bitCount(num2);
+        
+       
+        int result = 0;
+        int setBitsAdded = 0;
+     
+        for (int i = 31; i >= 0 && setBitsAdded < setBitsNum2; i--) {
+         
+            if ((num1 & (1 << i)) != 0) {
+                result |= (1 << i);
+                setBitsAdded++;
+            }
+        }
+        
+    
+        for (int i = 0; i <= 31 && setBitsAdded < setBitsNum2; i++) {
+            if ((result & (1 << i)) == 0) { // Check if the bit in the result is unset
+                result |= (1 << i); // Set the corresponding bit in the result
+                setBitsAdded++;
+            }
+        }
+        
+        return result;
+    }
+}

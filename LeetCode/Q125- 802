@@ -1,0 +1,52 @@
+https://leetcode.com/problems/find-eventual-safe-states/description/?envType=daily-question&envId=2025-01-24
+
+import java.util.ArrayList;
+import java.util.List;
+ 
+public class Solution {
+    public List<Integer> eventualSafeNodes(int[][] graph) {
+        int n = graph.length;
+        int[] visited = new int[n];
+        List<Integer> safeNodes = new ArrayList<>();
+
+        for (int i = 0; i < n; i++) {
+            if (dfs(graph, visited, i)) {
+                safeNodes.add(i);
+            }
+        }
+
+        return safeNodes; 
+    }
+
+    private boolean dfs(int[][] graph, int[] visited, int node) {
+        
+        if (visited[node] > 0) {
+            return visited[node] == 2; 
+        }
+
+    
+        visited[node] = 1;
+
+        for (int neighbor : graph[node]) {
+            if (visited[neighbor] == 1 || !dfs(graph, visited, neighbor)) {
+            
+                return false;
+            }
+        }
+
+    
+        visited[node] = 2;
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Solution solver = new Solution();
+        
+    
+        int[][] graph1 = {{1,2},{2,3},{5},{0},{5}, {}, {}};
+        System.out.println(solver.eventualSafeNodes(graph1));
+        
+        int[][] graph2 = {{1,2,3,4},{1,2},{3,4},{0,4},{}};
+        System.out.println(solver.eventualSafeNodes(graph2)); 
+    }
+}

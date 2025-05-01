@@ -1,0 +1,28 @@
+https://codeforces.com/problemset/problem/1472/A
+
+import java.util.Scanner;
+public class Problem1472A {
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int t =sc.nextInt();
+        while(t-- >=1){
+            int w  = sc.nextInt();
+            int h = sc.nextInt();
+            long n = sc.nextLong();
+            long sheets=1;
+            while(w % 2==0){
+                w= w/2;
+                sheets = sheets * 2;
+            }
+            while( h % 2 ==0){
+                h = h/2;
+                sheets = sheets*2;
+            }
+            if(sheets>=n){
+                System.out.println("Yes");
+            }else{
+                System.out.println("No");
+            }
+        }
+    }
+}

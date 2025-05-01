@@ -1,0 +1,26 @@
+https://leetcode.com/problems/unique-length-3-palindromic-subsequences/description/?envType=daily-question&envId=2025-01-04
+ 
+ 
+import java.util.HashSet;
+class Solution {
+    public int countPalindromicSubsequence(String s) {
+        int n = s.length();
+        int[] left = new int[26]; 
+        int[] right = new int[26]; 
+        for (char c : s.toCharArray()) {
+            right[c - 'a']++;
+        }
+        HashSet<String> uniquePalindromes = new HashSet<>();      
+        for (int i = 0; i < n; i++) {
+            char midChar = s.charAt(i);
+            right[midChar - 'a']--;          
+            for (char c = 'a'; c <= 'z'; c++) {
+                if (left[c - 'a'] > 0 && right[c - 'a'] > 0) {
+                    uniquePalindromes.add("" + c + midChar + c);
+                }
+            }         
+            left[midChar - 'a']++;
+        }
+       return uniquePalindromes.size();
+    }
+}

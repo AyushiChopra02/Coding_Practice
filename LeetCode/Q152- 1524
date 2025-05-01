@@ -1,0 +1,25 @@
+https://leetcode.com/problems/number-of-sub-arrays-with-odd-sum/description/?envType=daily-question&envId=2025-02-25
+
+class Solution {
+    public int numOfSubarrays(int[] arr) {
+        final int MOD = 1000000007;
+        int oddCount = 0, evenCount = 1; // evenCount starts at 1 for the prefix sum = 0 case
+        int prefixSum = 0;
+        int result = 0;
+
+        for (int num : arr) {
+            prefixSum += num;
+
+            // If prefixSum is odd, it means (prefixSum - even) subarrays are odd
+            if (prefixSum % 2 == 1) {
+                result = (result + evenCount) % MOD;
+                oddCount++;
+            } else { // If prefixSum is even, (prefixSum - odd) subarrays are odd
+                result = (result + oddCount) % MOD;
+                evenCount++;
+            }
+        }
+
+        return result;
+    }
+}

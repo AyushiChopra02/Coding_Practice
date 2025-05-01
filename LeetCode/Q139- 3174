@@ -1,0 +1,21 @@
+https://leetcode.com/problems/clear-digits/description/?envType=daily-question&envId=2025-02-10
+
+
+class Solution {
+    public String clearDigits(String s) {
+        StringBuilder stack = new StringBuilder();
+
+        for (char ch : s.toCharArray()) {
+            if (Character.isDigit(ch)) {
+                // Remove the closest non-digit character (last character in stack)
+                if (stack.length() > 0) {
+                    stack.deleteCharAt(stack.length() - 1);
+                }
+            } else {
+                stack.append(ch);
+            }
+        }
+        
+        return stack.toString();
+    }
+}

@@ -1,0 +1,25 @@
+https://leetcode.com/problems/maximum-beauty-of-an-array-after-applying-operation/description/?envType=daily-question&envId=2024-12-11
+
+import java.util.Arrays;
+
+public class Solution {
+    public int maximumBeauty(int[] nums, int k) {
+        // Step 1: Sort the array
+        Arrays.sort(nums);
+
+        // Step 2: Sliding window to calculate the maximum beauty
+        int maxBeauty = 0;
+        int start = 0;
+
+        for (int end = 0; end < nums.length; end++) {
+            // Check if the current window is valid
+            while (nums[end] - nums[start] > 2 * k) {
+                start++; // Shrink the window
+            }
+            // Update the maximum beauty
+            maxBeauty = Math.max(maxBeauty, end - start + 1);
+        }
+
+        return maxBeauty;
+    }
+}

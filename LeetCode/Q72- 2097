@@ -1,0 +1,56 @@
+https://leetcode.com/problems/valid-arrangement-of-pairs/
+
+import java.util.*;
+
+public class Solution {
+    public int[][] validArrangement(int[][] pairs) {
+        
+        Map<Integer, Stack<Integer>> graph = new HashMap<>();
+        Map<Integer, Integer> outDegree = new HashMap<>();
+        Map<Integer, Integer> inDegree = new HashMap<>();
+        
+        for (int[] pair : pairs) {
+            int start = pair[0], end = pair[1];
+            graph.putIfAbsent(start, new Stack<>());
+            graph.get(start).push(end);
+            
+            outDegree.put(start, outDegree.getOrDefault(start, 0) + 1);
+            inDegree.put(end, inDegree.getOrDefault(end, 0) + 1);
+        }
+
+        int startNode = pairs[0][0]; 
+        for (int node : graph.keySet()) {
+            int out = outDegree.getOrDefault(node, 0);
+            int in = inDegree.getOrDefault(node, 0);
+            if (out > in) {
+                startNode = node; 
+                break;
+            }
+        }
+        
+        // Step 3: Construct the Eulerian path using Hierholzer's algorithm
+        LinkedList<Integer> path = new LinkedList<>();
+        dfs(graph, startNode, path);
+        
+        // Step 4: Build the result in the correct format
+        int[][] result = new int[path.size() - 1][2];
+        Iterator<Integer> it = path.iterator();
+        int prev = it.next();
+        int index = 0;
+        while (it.hasNext()) {
+            int next = it.next();
+            result[index++] = new int[] { prev, next };
+            prev = next;
+        }
+        return result;
+    }
+    
+    private void dfs(Map<Integer, Stack<Integer>> graph, int node, LinkedList<Integer> path) {
+        Stack<Integer> neighbors = graph.getOrDefault(node, new Stack<>());
+        while (!neighbors.isEmpty()) {
+            int next = neighbors.pop();
+            dfs(graph, next, path);
+        }
+        path.addFirst(node); // Backtrack and add the node to the path
+    }
+}

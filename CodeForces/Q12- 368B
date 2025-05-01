@@ -1,0 +1,36 @@
+https://codeforces.com/contest/368/problem/B
+
+
+
+import java.util.LinkedHashSet;
+import java.util.Scanner;
+import java.util.Set;
+ 
+public class Problem368B {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        int n = sc.nextInt(); 
+        int m = sc.nextInt();
+        
+        int[] a = new int[n];
+        int[] res = new int[n + 1];
+        Set<Integer> dist = new LinkedHashSet<>();
+        
+        for (int i = 0; i < n; i++) {
+            a[i] = sc.nextInt();
+        }
+        
+       
+        for (int j = n - 1; j >= 0; j--) {
+            dist.add(a[j]);
+            res[j] = dist.size();
+        }
+        
+        while (m-- > 0) {
+            int q = sc.nextInt();
+            System.out.println(res[q - 1]);
+        }
+        
+        sc.close(); 
+    }
+}

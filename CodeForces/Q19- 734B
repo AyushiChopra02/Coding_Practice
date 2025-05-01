@@ -1,0 +1,30 @@
+https://codeforces.com/problemset/problem/734/B
+
+import java.util.Scanner;
+public class Problem734B{
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int two= sc.nextInt();
+        int three = sc.nextInt();
+        int five=sc.nextInt();
+        int six = sc.nextInt();
+        long sum=0;
+        while(two >= 1){
+            if(five>=1 && six >= 1){
+                sum = sum + 256;
+                two--;
+                five--;
+                six--;
+            }
+            else if(two>=1 && three>=1){
+                sum= sum + 32;
+                two--;
+                three--;
+                
+            }else{
+                break;
+            }
+        }
+        System.out.println(sum);
+    }
+}

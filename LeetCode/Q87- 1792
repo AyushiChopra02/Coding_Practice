@@ -1,0 +1,44 @@
+https://leetcode.com/problems/maximum-average-pass-ratio/description/?envType=daily-question&envId=2024-12-15
+
+
+import java.util.PriorityQueue;
+
+public class Solution {
+    public double maxAverageRatio(int[][] classes, int extraStudents) {
+        
+        PriorityQueue<double[]> maxHeap = new PriorityQueue<>((a, b) -> Double.compare(b[0], a[0]));
+
+        for (int[] cls : classes) {
+            int pass = cls[0];
+            int total = cls[1];
+            double delta = improvement(pass, total);
+            maxHeap.offer(new double[]{delta, pass, total});
+        }
+
+        
+        while (extraStudents > 0) {
+            double[] top = maxHeap.poll();
+            double delta = top[0];
+            int pass = (int) top[1];
+            int total = (int) top[2];
+
+          
+            pass++;
+            total++;
+            extraStudents--;     
+            maxHeap.offer(new double[]{improvement(pass, total), pass, total});
+        }
+        double totalRatio = 0.0;
+        while (!maxHeap.isEmpty()) {
+            double[] cls = maxHeap.poll();
+            int pass = (int) cls[1];
+            int total = (int) cls[2];
+            totalRatio += (double) pass / total;
+        }
+
+        return totalRatio / classes.length;
+    }
+    private double improvement(int pass, int total) {
+        return ((double) (pass + 1) / (total + 1)) - ((double) pass / total);
+    }
+}

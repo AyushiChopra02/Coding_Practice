@@ -1,0 +1,42 @@
+https://leetcode.com/problems/make-sum-divisible-by-p/description/?envType=daily-question&envId=2024-10-03
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int minSubarray(int[] nums, int p) {
+     
+        long totalSum = 0;
+        for (int num : nums) {
+            totalSum += num;
+        }
+        long remainder = totalSum % p;
+        if (remainder == 0) {
+            return 0;
+        }
+        
+        Map<Long, Integer> prefixModMap = new HashMap<>();
+        prefixModMap.put(0L, -1); 
+        
+        long currentPrefixSum = 0;
+        int minLength = nums.length;
+        
+        for (int i = 0; i < nums.length; i++) {
+        
+            currentPrefixSum = (currentPrefixSum + nums[i]) % p;
+            
+        
+            long targetMod = (currentPrefixSum - remainder + p) % p;
+            
+        
+            if (prefixModMap.containsKey(targetMod)) {
+                int prevIndex = prefixModMap.get(targetMod);
+                minLength = Math.min(minLength, i - prevIndex);
+            }
+            
+            prefixModMap.put(currentPrefixSum, i);
+        }
+        
+        return minLength == nums.length ? -1 : minLength;
+    }
+}

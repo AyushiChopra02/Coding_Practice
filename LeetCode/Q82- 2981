@@ -1,0 +1,54 @@
+https://leetcode.com/problems/find-longest-special-substring-that-occurs-thrice-i/description/?envType=daily-question&envId=2024-12-10
+
+import java.util.HashMap;
+
+public class Solution {
+    public int maximumLength(String s) { // Updated method name
+        int n = s.length();
+        int maxLen = -1; // Default result
+
+        // Start with the maximum possible length and work backwards
+        for (int len = n; len >= 1; len--) {
+            HashMap<String, Integer> substringCount = new HashMap<>();
+
+            // Slide through the string with the current length
+            for (int i = 0; i <= n - len; i++) {
+                String substring = s.substring(i, i + len);
+
+                // Check if the substring is special
+                if (isSpecial(substring)) {
+                    substringCount.put(substring, substringCount.getOrDefault(substring, 0) + 1);
+                }
+            }
+
+            // Check if any substring of this length occurs at least 3 times
+            for (String sub : substringCount.keySet()) {
+                if (substringCount.get(sub) >= 3) {
+                    maxLen = len;
+                    return maxLen; // Return immediately as we found the longest
+                }
+            }
+        }
+        return maxLen; // Return -1 if no valid substring is found
+    }
+
+    // Helper method to check if a substring is special
+    private boolean isSpecial(String s) {
+        char c = s.charAt(0);
+        for (char ch : s.toCharArray()) {
+            if (ch != c) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+
+        // Test cases
+        System.out.println(solution.maximumLength("aaaa")); // Output: 2
+        System.out.println(solution.maximumLength("abcdef")); // Output: -1
+        System.out.println(solution.maximumLength("abcaba")); // Output: 1
+    }
+}

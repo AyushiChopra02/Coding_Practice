@@ -1,0 +1,48 @@
+https://leetcode.com/problems/neighboring-bitwise-xor/description/?envType=daily-question&envId=2025-01-17
+
+
+public class Solution {
+    public boolean doesValidArrayExist(int[] derived) {
+        int n = derived.length;
+        
+        // Check for the case when original[0] is assumed to be 0
+        if (isValid(derived, 0, n)) {
+            return true;
+        }
+        
+        // Check for the case when original[0] is assumed to be 1
+        if (isValid(derived, 1, n)) {
+            return true;
+        }
+        
+        // No valid original array found
+        return false;
+    }
+
+    private boolean isValid(int[] derived, int firstValue, int n) {
+        int[] original = new int[n];
+        original[0] = firstValue;
+        
+        // Reconstruct the array
+        for (int i = 1; i < n; i++) {
+            original[i] = derived[i - 1] ^ original[i - 1];
+        }
+        
+        // Validate the circular condition
+        return (original[n - 1] ^ original[0]) == derived[n - 1];
+    }
+
+    public static void main(String[] args) {
+        Solution solution = new Solution();
+        
+        // Test cases
+        int[] derived1 = {1, 1, 0};
+        System.out.println(solution.doesValidArrayExist(derived1)); // Output: true
+
+        int[] derived2 = {1, 1};
+        System.out.println(solution.doesValidArrayExist(derived2)); // Output: true
+
+        int[] derived3 = {1, 0};
+        System.out.println(solution.doesValidArrayExist(derived3)); // Output: false
+    }
+}

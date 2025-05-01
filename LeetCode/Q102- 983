@@ -1,0 +1,27 @@
+https://leetcode.com/problems/minimum-cost-for-tickets/description/
+  
+         
+import java.util.*;  
+public class Solution {
+    public int mincostTickets(int[] days, int[] costs) {
+        int maxDay = 365;
+        int[] dp = new int[maxDay + 1];
+        Arrays.fill(dp, Integer.MAX_VALUE);
+        dp[0] = 0;
+        Set<Integer> travelDays = new HashSet<>();
+        for (int day : days) {
+            travelDays.add(day);
+        }
+        for (int day = 1; day <= maxDay; day++) {
+            if (travelDays.contains(day)) {
+                dp[day] = dp[Math.max(0, day - 1)] + costs[0];
+            
+                dp[day] = Math.min(dp[day], dp[Math.max(0, day - 7)] + costs[1]);
+                dp[day] = Math.min(dp[day], dp[Math.max(0, day - 30)] + costs[2]);
+            } else {
+                dp[day] = dp[day - 1];
+            }
+        }
+        return dp[maxDay];
+    }
+}

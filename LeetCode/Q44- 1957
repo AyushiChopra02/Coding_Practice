@@ -1,0 +1,19 @@
+https://leetcode.com/problems/delete-characters-to-make-fancy-string/description/?envType=daily-question&envId=2024-11-01
+
+class Solution {
+    public String makeFancyString(String s) {
+        StringBuilder result = new StringBuilder();
+        
+        for (int i = 0; i < s.length(); i++) {
+            
+            if (result.length() >= 2 
+                && result.charAt(result.length() - 1) == s.charAt(i) 
+                && result.charAt(result.length() - 2) == s.charAt(i)) {
+                continue; 
+            }
+            result.append(s.charAt(i));
+        }
+        
+        return result.toString();
+    }
+}
