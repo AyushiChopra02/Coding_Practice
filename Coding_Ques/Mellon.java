@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class TeamFormation {
+public class Mellon {
     static class Pair {
         int score;
         int index;
