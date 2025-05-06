@@ -1,6 +1,6 @@
 https://leetcode.com/problems/minimum-recolors-to-get-k-consecutive-black-blocks/?envType=daily-question&envId=2025-03-08
 
-
+ 
 class Solution {
     public int minimumRecolors(String blocks, int k) {
         int minOperations = Integer.MAX_VALUE;
