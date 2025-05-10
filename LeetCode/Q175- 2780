@@ -1,7 +1,7 @@
 https://leetcode.com/problems/minimum-index-of-a-valid-split/description/?envType=daily-question&envId=2025-03-27
 
 import java.util.*;
-
+ 
 class Solution {
     public int minimumIndex(List<Integer> nums) {
         Map<Integer, Integer> mp = new HashMap<>(); // Stores frequency of each number

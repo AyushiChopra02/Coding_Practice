@@ -1,0 +1,16 @@
+https://leetcode.com/problems/number-of-equivalent-domino-pairs/description/?envType=daily-question&envId=2025-05-04
+
+
+class Solution {
+    public int numEquivDominoPairs(int[][] dominoes) {
+        int[][] count = new int[10][10]; 
+        int pairs = 0;
+        for (int[] d : dominoes) {
+            int a = Math.min(d[0], d[1]);
+            int b = Math.max(d[0], d[1]); 
+            pairs += count[a][b]; 
+            count[a][b]++; 
+        } 
+        return pairs;
+    }
+}

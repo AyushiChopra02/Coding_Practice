@@ -1,6 +1,6 @@
 https://leetcode.com/problems/count-subarrays-with-score-less-than-k/description/?envType=daily-question&envId=2025-04-28
 
-
+ 
 class Solution {
     public long countSubarrays(int[] nums, long k) {
         int start = 0;
