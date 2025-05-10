@@ -47,7 +47,7 @@ public class Mellon {
             if (backTop == null || (frontTop != null && frontTop.score >= backTop.score)) {
                 totalScore += frontTop.score;
                 frontPQ.poll();
-                int idx = frontTop.index;
+               
 
                 // Next available index from front
                 if (i <= j) {
@@ -57,7 +57,7 @@ public class Mellon {
             } else {
                 totalScore += backTop.score;
                 backPQ.poll();
-                int idx = backTop.index;
+              
 
                 // Next available index from back
                 if (i <= j) {
