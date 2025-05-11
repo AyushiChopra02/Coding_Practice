@@ -7,7 +7,7 @@ class Solution {
         int[][] minimumTime = new int[r][c];
         for (int[] is : minimumTime) {
             Arrays.fill(is, Integer.MAX_VALUE);
-        }
+        } 
 
         PriorityQueue<Pair> pq = new PriorityQueue<>((a, b) -> a.steps - b.steps);
         pq.add(new Pair(-1, 0, 0));
