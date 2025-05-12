@@ -6,7 +6,7 @@ public class Atlassian {
         int n = nums.length;
         long totalSum = 0;
 
-        int[] left = new int[n];  
+        int[] left = new int[n];   
         int[] right = new int[n]; 
 
         Stack<Integer> stack = new Stack<>();
