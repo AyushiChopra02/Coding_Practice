@@ -1,7 +1,6 @@
 https://leetcode.com/problems/longest-unequal-adjacent-groups-subsequence-i/description/?envType=daily-question&envId=2025-05-15
 
 
-
 class Solution {
     public List<String> getLongestSubsequence(String[] words, int[] groups) {
         List<String> result = new ArrayList<>();
