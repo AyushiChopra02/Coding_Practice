@@ -4,7 +4,7 @@ class Solution {
     public int minimumLength(String s) {
         int[] freq = new int[26];
         
-        for (char c : s.toCharArray()) {
+        for (char c : s.toCharArray()) { 
             freq[c - 'a']++;
         }    
         int length = 0;
