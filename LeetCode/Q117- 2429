@@ -5,7 +5,7 @@ class Solution {
      
         int setBitsNum2 = Integer.bitCount(num2);
         
-       
+        
         int result = 0;
         int setBitsAdded = 0;
      
