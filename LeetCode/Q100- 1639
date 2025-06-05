@@ -3,7 +3,7 @@ https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dic
 import java.util.*;  
 public class Solution {  
     public int numWays(String[] words, String target) {
-        int MOD = 1_000_000_007;
+        int MOD = 1_000_000_007;  
         int m = words[0].length();
         int n = target.length();
         int[][] freq = new int[26][m];
