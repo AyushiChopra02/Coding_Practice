@@ -3,7 +3,7 @@ Ques:
 You are given an array of positive integers. Your task is to divide the array into groups of size 3 such that:For each group, calculate the median 
 (the middle element when the group is sorted).The goal is to maximize the sum of medians across all the groups.
 
-Ans :
+Ans : 
 import java.util.*;
 class Main {
     public static void main(String [] args)
