@@ -6,7 +6,7 @@ public class Mellon {
         int index;
 
         Pair(int score, int index) {
-            this.score = score;
+            this.score = score;  
             this.index = index;
         }
     }
