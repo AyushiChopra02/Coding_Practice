@@ -6,7 +6,8 @@ class Solution {
         List<Integer> list = new ArrayList<>();
         for (int n : nums)
             list.add(n);
-        while (true) {
+        while (true) 
+            {
             HashMap<Integer, Integer> mpp = new HashMap<>();
             temp = 0;
             for (int num : list)
