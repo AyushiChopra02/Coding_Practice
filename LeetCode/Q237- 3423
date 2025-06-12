@@ -1,0 +1,15 @@
+https://leetcode.com/problems/maximum-difference-between-adjacent-elements-in-a-circular-array/description/?envType=daily-question&envId=2025-06-12
+
+public class Solution {
+    public int maxAdjacentDistance(int[] nums) {
+        int n = nums.length;
+        int maxDifference = 0;
+
+        for (int i = 0; i < n; i++) {
+            int currentDifference = Math.abs(nums[i] - nums[(i + 1) % n]);
+            maxDifference = Math.max(maxDifference, currentDifference);
+        }
+
+        return maxDifference;
+    }
+}
