@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.Stack;
 
-public class Atlassian {
+public class Atlassian { 
     public static long sumOfGoodness(int[] nums) {
         int n = nums.length;
         long totalSum = 0;
