@@ -8,7 +8,7 @@ class Solution {
             if (canPartition(Integer.toString(square), 0, i, 0)) {
                 sum += square;
             }
-        }
+        }  
         return sum;
     }
 
