@@ -1,6 +1,6 @@
 https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/description/?envType=daily-question&envId=2025-06-13
 
-
+ 
 class Solution {
     public int minimizeMax(int[] nums, int p) {
         if (p == 0) return 0;
