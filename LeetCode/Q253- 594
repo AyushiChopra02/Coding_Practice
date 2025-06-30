@@ -4,7 +4,7 @@ https://leetcode.com/problems/longest-harmonious-subsequence/description/?envTyp
 import java.util.HashMap;
 import java.util.Map;
 
-public class Solution {
+public class Solution { 
     public int findLHS(int[] nums) {
         Map<Integer, Integer> frequencyMap = new HashMap<>();
         
