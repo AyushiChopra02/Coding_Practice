@@ -1,0 +1,28 @@
+https://leetcode.com/problems/longest-harmonious-subsequence/description/?envType=daily-question&envId=2025-06-30
+
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class Solution {
+    public int findLHS(int[] nums) {
+        Map<Integer, Integer> frequencyMap = new HashMap<>();
+        
+        
+        for (int num : nums) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+        
+        int maxLen = 0;
+        
+    
+        for (int num : frequencyMap.keySet()) {
+            if (frequencyMap.containsKey(num + 1)) {
+                int len = frequencyMap.get(num) + frequencyMap.get(num + 1);
+                maxLen = Math.max(maxLen, len);
+            }
+        }
+        
+        return maxLen;
+    }
+}
