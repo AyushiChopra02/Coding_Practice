@@ -1,6 +1,6 @@
 https://leetcode.com/problems/painting-a-grid-with-three-different-colors/description/?envType=daily-question&envId=2025-05-18
 
-
+ 
 public class Solution 
 {
     private static final int MOD = 1_000_000_007;
