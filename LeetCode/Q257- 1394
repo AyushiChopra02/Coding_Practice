@@ -3,7 +3,7 @@ https://leetcode.com/problems/find-lucky-integer-in-an-array/description/?envTyp
 
 class Solution {
     public int findLucky(int[] arr) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        HashMap<Integer, Integer> map = new HashMap<>(); 
 
         for (int n : arr) {
             map.put(n, map.getOrDefault(n, 0) + 1);
