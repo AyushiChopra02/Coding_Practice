@@ -1,6 +1,6 @@
 https://leetcode.com/problems/find-all-k-distant-indices-in-an-array/description/?envType=daily-question&envId=2025-06-24
 
-class Solution {
+class Solution { 
 
     public List<Integer> findKDistantIndices(int[] nums, int key, int k) {
         List<Integer> res = new ArrayList<>();
