@@ -2,7 +2,7 @@ https://leetcode.com/problems/finding-pairs-with-a-certain-sum/description/?envT
 
 class FindSumPairs {
     int[] n1, n2;
-    Map<Integer, Integer> m = new HashMap<>();
+    Map<Integer, Integer> m = new HashMap<>(); 
 
     public FindSumPairs(int[] nums1, int[] nums2) {
         n1 = nums1;
