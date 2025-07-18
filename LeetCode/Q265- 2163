@@ -1,4 +1,7 @@
-https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/description/?envType=daily-question&envId=2025-07-18class Solution {
+https://leetcode.com/problems/minimum-difference-in-sums-after-removal-of-elements/description/?envType=daily-question&envId=2025-07-18
+
+
+class Solution {
  public long minimumDifference(int[] nums) {
      int n = nums.length, k = n / 3;
      long[] leftMins = new long[n];   // sum of k smallest from left
