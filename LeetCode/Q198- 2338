@@ -1,6 +1,6 @@
 https://leetcode.com/problems/count-the-number-of-ideal-arrays/description/?envType=daily-question&envId=2025-04-22
 
-
+ 
 class Solution {
     static final int mod = 1000000007;
     int[] factMemo = new int[100000];
