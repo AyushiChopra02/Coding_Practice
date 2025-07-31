@@ -1,7 +1,7 @@
 https://leetcode.com/problems/total-characters-in-string-after-transformations-ii/description/?envType=daily-question&envId=2025-05-14
 
 class Solution {
-    private static final int K = 26;
+    private static final int K = 26; 
     private static final int MOD = 1_000_000_007;
 
     public int lengthAfterTransformations(String s, int t, List<Integer> nums) {
