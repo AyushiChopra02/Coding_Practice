@@ -1,6 +1,6 @@
 https://leetcode.com/problems/maximum-fruits-harvested-after-at-most-k-steps/description/?envType=daily-question&envId=2025-08-03
 
-
+ 
 class Solution {
     public int maxTotalFruits(int[][] fruits, int startPos, int k) {
         int left = 0, sum = 0, max = 0;
