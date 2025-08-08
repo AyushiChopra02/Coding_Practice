@@ -2,7 +2,7 @@ https://leetcode.com/problems/soup-servings/description/?envType=daily-question&
 
 
 class Solution {
-    private Double[][] cache;
+    private Double[][] cache; 
 
     public double soupServings(int n) {
         if (n > 5000) return 1.0;
