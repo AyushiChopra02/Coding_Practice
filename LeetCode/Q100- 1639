@@ -1,6 +1,6 @@
 https://leetcode.com/problems/number-of-ways-to-form-a-target-string-given-a-dictionary/description/?envType=daily-question&envId=2024-12-29
     
-import java.util.*;  
+import java.util.*;   
 public class Solution {  
     public int numWays(String[] words, String target) {
         int MOD = 1_000_000_007;  
