@@ -3,7 +3,7 @@ https://leetcode.com/problems/maximum-69-number/description/?envType=daily-quest
  
 class Solution {
     public int maximum69Number(int num) {
-        int temp = num;
+        int temp = num; 
         int index = -1;
         int pos = 0;
         
