@@ -1,0 +1,13 @@
+https://leetcode.com/problems/number-of-zero-filled-subarrays/description/?envType=daily-question&envId=2025-08-19
+
+
+class Solution {
+    public long zeroFilledSubarray(int[] nums) {
+        long cnt = 0, streak = 0;
+        for (int num : nums) {
+            streak = (num == 0) ? streak + 1 : 0;
+            cnt += streak;
+        }
+        return cnt;
+    }
+}
