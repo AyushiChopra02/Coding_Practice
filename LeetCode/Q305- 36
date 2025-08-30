@@ -1,6 +1,6 @@
 https://leetcode.com/problems/valid-sudoku/description/?envType=daily-question&envId=2025-08-30
 
-
+ 
 class Solution {
     public boolean isValidSudoku(char[][] board) {
         boolean[][] rows = new boolean[9][9];
