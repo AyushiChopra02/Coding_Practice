@@ -2,7 +2,7 @@ https://leetcode.com/problems/maximum-average-pass-ratio/description/?envType=da
 
 
 
-import java.util.PriorityQueue; 
+import java.util.PriorityQueue;  
 
 public class Solution {
     public double maxAaverageRatio(int[][] classes, int extraStudents) {
