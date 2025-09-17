@@ -2,7 +2,7 @@ https://leetcode.com/problems/design-a-food-rating-system/description/?envType=d
 
 
 import java.util.*;
-
+ 
 class Food {
     String name;
     String cuisine;
