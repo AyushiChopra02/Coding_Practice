@@ -3,7 +3,7 @@ https://leetcode.com/problems/minimum-number-of-operations-to-move-all-balls-to-
 public class Solution {  
     public int[] minOperations(String boxes) {   
         int n = boxes.length();
-        int[] answer = new int[n];
+        int[] answer = new int[n]; 
 
         int balls = 0; 
         int operations = 0; 
