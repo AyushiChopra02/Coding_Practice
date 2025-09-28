@@ -3,7 +3,7 @@ https://leetcode.com/problems/shifting-letters-ii/description/?envType=daily-que
 public class Solution {  
     public String shiftingLetters(String s, int[][] shifts) { 
         int n = s.length(); 
-        int[] netShifts = new int[n + 1]; // Use n+1 to handle end+1 operations easily.
+        int[] netShifts = new int[n + 1]; // Use n+1 to handle end+1 operations easily.  
 
         // Apply difference array logic based on the shifts
         for (int[] shift : shifts) {
