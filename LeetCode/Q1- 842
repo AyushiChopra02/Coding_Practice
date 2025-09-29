@@ -1,6 +1,6 @@
 https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/
 
-class Solution {
+class Solution { 
     public List<Integer> splitIntoFibonacci(String num) {
         List<Integer> result = new ArrayList<>();
         backtrack(num, result, 0);   
