@@ -3,7 +3,7 @@ https://leetcode.com/problems/split-array-into-fibonacci-sequence/description/
 class Solution {
     public List<Integer> splitIntoFibonacci(String num) {
         List<Integer> result = new ArrayList<>();
-        backtrack(num, result, 0);  
+        backtrack(num, result, 0);   
         return result;
     }
 
