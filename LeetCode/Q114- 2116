@@ -1,7 +1,7 @@
 https://leetcode.com/problems/check-if-a-parentheses-string-can-be-valid/?envType=daily-question&envId=2025-01-12
 
 
-class Solution {
+class Solution { 
     public boolean canBeValid(String s, String locked) {
         if (s.length() % 2 != 0) return false;
 
