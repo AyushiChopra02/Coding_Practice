@@ -4,7 +4,7 @@ https://leetcode.com/problems/maximum-score-after-splitting-a-string/description
 class Solution {  
     public int maxScore(String s) {
         int totalOnes = 0;
-        int leftZeros = 0;
+        int leftZeros = 0; 
         int rightOnes = 0;
         int maxScore = 0;
         for (char c : s.toCharArray()) {
