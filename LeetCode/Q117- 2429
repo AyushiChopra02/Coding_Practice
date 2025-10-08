@@ -3,7 +3,7 @@ https://leetcode.com/problems/minimize-xor/description/?envType=daily-question&e
 class Solution {
     public int minimizeXor(int num1, int num2) {
      
-        int setBitsNum2 = Integer.bitCount(num2);
+        int setBitsNum2 = Integer.bitCount(num2); 
         
         
         int result = 0;
