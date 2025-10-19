@@ -1,0 +1,42 @@
+https://leetcode.com/problems/lexicographically-smallest-string-after-applying-operations/submissions/1805648151/?envType=daily-question&envId=2025-10-19
+
+
+import java.util.*;
+
+class Solution {
+    public String findLexSmallestString(String s, int a, int b) {
+        Set<String> visited = new HashSet<>();
+        Queue<String> queue = new LinkedList<>();
+        String smallest = s;
+
+        queue.offer(s);
+        visited.add(s);
+
+        while (!queue.isEmpty()) {
+            String cur = queue.poll();  
+            if (cur.compareTo(smallest) < 0) smallest = cur;
+            String added = add(cur, a);
+
+            String rotated = rotate(cur, b);
+
+            if (visited.add(added)) queue.offer(added);
+            if (visited.add(rotated)) queue.offer(rotated);
+        }
+
+        return smallest;
+    }
+
+    private String add(String s, int a) {
+        char[] ch = s.toCharArray();
+        for (int i = 1; i < ch.length; i += 2) {
+            int num = (ch[i] - '0' + a) % 10;
+            ch[i] = (char) ('0' + num);
+        }
+        return new String(ch);
+    }
+    private String rotate(String s, int b) {
+        int n = s.length();
+        b %= n;
+        return s.substring(n - b) + s.substring(0, n - b);
+    }
+}
