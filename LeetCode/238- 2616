@@ -2,7 +2,7 @@ https://leetcode.com/problems/minimize-the-maximum-difference-of-pairs/descripti
 
   
 class Solution { 
-    public int minimizeMax(int[] nums, int p) {
+    public int minimizeMax(int[] nums, int p) { 
         if (p == 0) return 0;  
         Arrays.sort(nums); 
         int n = nums.length, left = 0, right = nums[n-1] - nums[0]; 
