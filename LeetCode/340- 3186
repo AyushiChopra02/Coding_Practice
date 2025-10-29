@@ -5,7 +5,7 @@ class Solution {
         Map<Integer, Long> freq = new HashMap<>();
         for (int p : power) freq.put(p, freq.getOrDefault(p, 0L) + 1);
 
-        List<Integer> keys = new ArrayList<>(freq.keySet());
+        List<Integer> keys = new ArrayList<>(freq.keySet()); 
         Collections.sort(keys);
 
         int n = keys.size();
