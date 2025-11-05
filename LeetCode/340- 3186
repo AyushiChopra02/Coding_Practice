@@ -2,7 +2,7 @@ https://leetcode.com/problems/maximum-total-damage-with-spell-casting/descriptio
      :
 class Solution {
     public long maximumTotalDamage(int[] power) {
-        Map<Integer, Long> freq = new HashMap<>();
+        Map<Integer, Long> freq = new HashMap<>(); 
         for (int p : power) freq.put(p, freq.getOrDefault(p, 0L) + 1);
 
         List<Integer> keys = new ArrayList<>(freq.keySet()); 
