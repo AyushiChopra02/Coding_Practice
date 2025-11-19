@@ -1,0 +1,18 @@
+https://leetcode.com/problems/keep-multiplying-found-values-by-two/description/?envType=daily-question&envId=2025-11-19
+
+class Solution {
+    public int findFinalValue(int[] nums, int original) {
+       boolean found = true;
+       while(found){
+        found = false;
+        for(int num :nums){
+            if(num==original){
+                original = original*2;
+                found = true;
+                break;
+            }
+        }
+       } 
+       return original;
+    }
+}
