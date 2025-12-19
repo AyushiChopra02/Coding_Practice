@@ -1,0 +1,51 @@
+https://leetcode.com/problems/find-all-people-with-secret/description/?envType=daily-question&envId=2025-12-19
+
+
+
+class Solution {
+    public List<Integer> findAllPeople(int n, int[][] meetings, int firstPerson) {
+        List<List<int[]>> adj = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            adj.add(new ArrayList<>());
+        }
+
+        for (int[] meet : meetings) {
+            int x = meet[0], y = meet[1], time = meet[2];
+            adj.get(x).add(new int[]{time, y});
+            adj.get(y).add(new int[]{time, x});
+        }
+
+        int[] know = new int[n];
+        Arrays.fill(know, Integer.MAX_VALUE);
+        know[0] = 0;
+        know[firstPerson] = 0;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        pq.offer(new int[]{0, 0});
+        pq.offer(new int[]{0, firstPerson});
+
+        while (!pq.isEmpty()) {
+            int[] current = pq.poll();
+            int time = current[0];
+            int person = current[1];
+
+            if (know[person] < time) continue;
+
+            for (int[] neighbor : adj.get(person)) {
+                int t = neighbor[0], nextPerson = neighbor[1];
+                if (know[nextPerson] > t && t >= time) {
+                    know[nextPerson] = t;
+                    pq.offer(new int[]{t, nextPerson});
+                }
+            }
+        }
+
+        List<Integer> result = new ArrayList<>();
+        for (int i = 0; i < n; i++) {
+            if (know[i] != Integer.MAX_VALUE) {
+                result.add(i);
+            }
+        }
+        return result;
+    }
+}
