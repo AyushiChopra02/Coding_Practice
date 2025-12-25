@@ -1,0 +1,20 @@
+https://leetcode.com/problems/maximize-happiness-of-selected-children/description/?envType=daily-question&envId=2025-12-25
+
+
+class Solution {
+    public long maximumHappinessSum(int[] happiness, int k) {
+        Arrays.sort(happiness);
+        long sum=0;
+        long turn =0;
+        for(int i=happiness.length-1; i>=0 && k>0 ; i--){
+            long curr=happiness[i]-turn;
+            if(curr>0){
+                sum += curr;
+            }
+            turn++;
+            k--;
+        }
+            return sum;
+    }
+
+}
