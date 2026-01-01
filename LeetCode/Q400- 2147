@@ -9,7 +9,7 @@ class Solution {
             if (corridor.charAt(i) == 'S') {
                 pos.add(i);
             }
-        }
+        } 
 
         if (pos.size() % 2 == 1 || pos.size() == 0) {
             return 0;
