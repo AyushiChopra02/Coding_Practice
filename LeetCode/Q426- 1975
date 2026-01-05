@@ -1,0 +1,27 @@
+https://leetcode.com/problems/maximum-matrix-sum/description/?envType=daily-question&envId=2026-01-05
+
+class Solution {
+    public long maxMatrixSum(int[][] matrix) {
+        int n = matrix.length;
+        long sum = 0;
+        int minAbsValue = Integer.MAX_VALUE; 
+        int negativeCount = 0; 
+
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                int value = matrix[i][j];
+                sum += Math.abs(value); 
+                minAbsValue = Math.min(minAbsValue, Math.abs(value)); 
+                if (value < 0) {
+                    negativeCount++; 
+                }
+            }
+        }
+
+        if (negativeCount % 2 != 0) {
+            sum -= 2L * minAbsValue; 
+        }
+
+        return sum;
+    }
+}
