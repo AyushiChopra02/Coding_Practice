@@ -3,7 +3,7 @@ https://leetcode.com/problems/separate-squares-i/description/?envType=daily-ques
 class Solution {
     public double separateSquares(int[][] squares) {
         double totalArea = 0;
-        double low = 2e9; // Initialize with a large value
+        double low = 2e9; // Initialize with a large value 
         double high = 0;
 
         // 1. Calculate Total Area and initial bounds
