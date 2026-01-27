@@ -1,0 +1,50 @@
+https://leetcode.com/problems/minimum-cost-path-with-edge-reversals/description/?envType=daily-question&envId=2026-01-27
+
+class Solution {
+    private List<List<int[]>> G;
+
+    private int dijkstra(int n) {
+        final int INF = 1_000_000_000;
+        int[] dist = new int[n];
+        boolean[] vis = new boolean[n];
+        Arrays.fill(dist, INF);
+        dist[0] = 0;
+
+        PriorityQueue<int[]> pq = new PriorityQueue<>(Comparator.comparingInt(a -> a[0]));
+        pq.offer(new int[]{0, 0}); 
+
+        while(!pq.isEmpty()){
+            int u = pq.poll()[1];
+
+            if(vis[u]) continue;
+            vis[u] = true;
+
+            for(int[] e : G.get(u)){
+                int v  = e[0];
+                int w  = e[1];
+                if(dist[u] + w < dist[v]){
+                    dist[v] = dist[u] + w;
+                    pq.offer(new int[]{dist[u] + w, v});
+                }
+            }
+        }
+
+        return dist[n - 1] == INF ? -1 : dist[n - 1];
+    }
+
+    public int minCost(int n, int[][] edges) {
+        G = new ArrayList<>(n);
+        for(int i = 0; i < n; i ++) G.add(new ArrayList<>());
+
+        for(int[] edge : edges){
+            int u = edge[0];
+            int v = edge[1];
+            int w = edge[2];
+
+            G.get(u).add(new int[]{v, w});
+            G.get(v).add(new int[]{u, 2 * w});
+        }
+
+        return dijkstra(n);
+    }
+}
