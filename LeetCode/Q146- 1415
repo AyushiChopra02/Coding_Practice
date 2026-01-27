@@ -2,7 +2,7 @@ https://leetcode.com/problems/the-k-th-lexicographical-string-of-all-happy-strin
 
 import java.util.ArrayList;
 import java.util.List;
-
+ 
 class Solution {
     public String getHappyString(int n, int k) {
         List<String> happyStrings = new ArrayList<>();
