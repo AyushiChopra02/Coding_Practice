@@ -1,0 +1,15 @@
+https://leetcode.com/problems/partitioning-into-minimum-number-of-deci-binary-numbers/description/?envType=daily-question&envId=2026-03-01
+
+class Solution {
+    public int minPartitions(String n) {
+        int val=0;
+
+        for(char c:n.toCharArray()){
+            val = Math.max(val, c-'0');
+            
+            if(val==9) return 9;
+        }
+
+        return val;
+    }
+}
