@@ -2,7 +2,7 @@ class Solution {
     public int minFlips(String s) {
         int n = s.length();
         String t = s + s;
-
+ 
         int diff1 = 0, diff2 = 0;
         int ans = Integer.MAX_VALUE;
 
