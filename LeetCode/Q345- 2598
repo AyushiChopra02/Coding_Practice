@@ -3,7 +3,7 @@ https://leetcode.com/problems/smallest-missing-non-negative-integer-after-operat
 
 class Solution {
     public int findSmallestInteger(int[] nums, int value) {
-        int n = nums.length, res = 0;
+        int n = nums.length, res = 0; 
         int[] rem = new int[value];
         for (int x : nums) {
             int r = ((x % value) + value) % value;
