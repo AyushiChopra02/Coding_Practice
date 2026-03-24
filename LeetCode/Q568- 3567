@@ -2,7 +2,7 @@ https://leetcode.com/problems/minimum-absolute-difference-in-sliding-submatrix/d
 
 class Solution {
     public int[][] minAbsDiff(int[][] grid, int k) {
-        int m = grid.length;
+        int m = grid.length; 
         int n = grid[0].length;
 
         int[][] ans = new int[m - k + 1][n - k + 1];
