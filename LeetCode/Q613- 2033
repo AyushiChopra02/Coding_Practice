@@ -2,7 +2,7 @@ https://leetcode.com/problems/minimum-operations-to-make-a-uni-value-grid/descri
 
 class Solution {
     public int minOperations(int[][] grid, int x) {
-        int n = grid.length, m = grid[0].length;
+        int n = grid.length, m = grid[0].length; 
         int N = n * m;
         int[] freq = new int[10001];
         int min = grid[0][0], max = min;
