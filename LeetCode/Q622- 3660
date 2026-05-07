@@ -6,7 +6,7 @@ class Solution {
 
         int[] pre = new int[n];
         int[] suf = new int[n];
-        int[] res = new int[n];
+        int[] res = new int[n]; 
 
   
         pre[0] = nums[0];
