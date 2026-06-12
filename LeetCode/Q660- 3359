@@ -1,0 +1,111 @@
+https://leetcode.com/problems/number-of-ways-to-assign-edge-weights-ii/?envType=daily-question&envId=2026-06-123359
+
+class Solution {
+    private static final int MOD = 1_000_000_007;
+
+    private int LOG;
+    private int[][] up;
+    private int[] depth;
+    private List<Integer>[] adj;
+
+    private long modPow(long a, long b) {
+        long ans = 1;
+
+        while (b > 0) {
+            if ((b & 1) == 1) {
+                ans = (ans * a) % MOD;
+            }
+
+            a = (a * a) % MOD;
+            b >>= 1;
+        }
+
+        return ans;
+    }
+
+    private void dfs(int node, int parent) {
+        up[node][0] = parent;
+
+        for (int j = 1; j < LOG; j++) {
+            up[node][j] = up[up[node][j - 1]][j - 1];
+        }
+
+        for (int neighbour : adj[node]) {
+            if (neighbour == parent) continue;
+
+            depth[neighbour] = depth[node] + 1;
+            dfs(neighbour, node);
+        }
+    }
+
+    private int lca(int u, int v) {
+        if (depth[u] < depth[v]) {
+            int temp = u;
+            u = v;
+            v = temp;
+        }
+
+        int diff = depth[u] - depth[v];
+
+        for (int j = LOG - 1; j >= 0; j--) {
+            if ((diff & (1 << j)) != 0) {
+                u = up[u][j];
+            }
+        }
+
+        if (u == v) return u;
+
+        for (int j = LOG - 1; j >= 0; j--) {
+            if (up[u][j] != up[v][j]) {
+                u = up[u][j];
+                v = up[v][j];
+            }
+        }
+
+        return up[u][0];
+    }
+
+    public int[] assignEdgeWeights(int[][] edges, int[][] queries) {
+        int n = edges.length + 1;
+
+        LOG = 1;
+        while ((1 << LOG) <= n) LOG++;
+
+        adj = new ArrayList[n + 1];
+        for (int i = 0; i <= n; i++) {
+            adj[i] = new ArrayList<>();
+        }
+
+        for (int[] edge : edges) {
+            int u = edge[0];
+            int v = edge[1];
+
+            adj[u].add(v);
+            adj[v].add(u);
+        }
+
+        depth = new int[n + 1];
+        up = new int[n + 1][LOG];
+
+        dfs(1, 0);
+
+        int[] ans = new int[queries.length];
+
+        for (int i = 0; i < queries.length; i++) {
+            int u = queries[i][0];
+            int v = queries[i][1];
+
+            int L = lca(u, v);
+
+            long dist = depth[u] + depth[v] - 2L * depth[L];
+
+            if (dist == 0) {
+                ans[i] = 0;
+            } else {
+                ans[i] = (int) modPow(2, dist - 1);
+            }
+        }
+
+        return ans;
+    }
+}
