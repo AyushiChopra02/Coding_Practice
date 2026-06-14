@@ -2,7 +2,7 @@ https://leetcode.com/problems/string-matching-in-an-array/description/?envType=d
      
 import java.util.ArrayList;    
 import java.util.List;
-public class Solution {
+public class Solution { 
     public List<String> stringMatching(String[] words) {
         List<String> result = new ArrayList<>();
         
