@@ -1,0 +1,13 @@
+https://leetcode.com/problems/find-the-highest-altitude/description/?envType=daily-question&envId=2026-06-19
+
+class Solution {
+    public int largestAltitude(int[] gain) {
+       int curr=0;
+       int maxAl=0;
+       for(int g:gain){
+        curr += g;
+        maxAl= Math.max(maxAl,curr);
+       } 
+       return maxAl;
+    }
+}
