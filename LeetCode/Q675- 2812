@@ -1,5 +1,5 @@
 https://leetcode.com/problems/find-the-safest-path-in-a-grid/description/?envType=daily-question&envId=2026-07-01
-
+ 
 class Solution {
     static final int[][] dirs = {{1, 0}, {0, 1}, {-1, 0}, {0, -1}};
 
