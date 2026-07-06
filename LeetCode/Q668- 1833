@@ -8,7 +8,7 @@ class Solution {
         for (int cost : costs) {
             freq[cost]++;
         }
-
+ 
         int answer = 0;
 
         for (int cost = 1; cost <= MAX_COST; cost++) {
