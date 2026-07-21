@@ -1,0 +1,33 @@
+https://leetcode.com/problems/time-based-key-value-store/description/?envType=study-plan-v2&envId=binary-search
+
+import java.util.*;
+
+class TimeMap {
+    Map<String, TreeMap<Integer, String>> map;
+
+    public TimeMap() {
+        map = new HashMap<>();
+    }
+    public void set(String key, String value, int timestamp) {
+        if (!map.containsKey(key)) {
+            map.put(key, new TreeMap<>());
+        }
+        map.get(key).put(timestamp, value);
+    }
+    
+    public String get(String key, int timestamp) {
+        if (!map.containsKey(key)) {
+            return "";
+        }
+        
+        TreeMap<Integer, String> timestampMap = map.get(key);
+        
+        Map.Entry<Integer, String> entry = timestampMap.floorEntry(timestamp);
+        
+        if (entry == null) {
+            return "";
+        } else {
+            return entry.getValue();
+        }
+    }
+}
