@@ -1,0 +1,19 @@
+https://leetcode.com/problems/number-of-unique-xor-triplets-i/description/?envType=daily-question&envId=2026-07-23
+
+
+class Solution {
+    public int uniqueXorTriplets(int[] nums) {
+        int n = nums.length;
+
+        if (n <= 2) return n;
+
+        int bits = 0;
+        int x = n;
+        while (x > 0) {
+            bits++;
+            x >>= 1;
+        }
+
+        return 1 << bits;
+    }
+}
