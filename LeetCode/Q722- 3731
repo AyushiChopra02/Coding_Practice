@@ -3,7 +3,7 @@ class Solution {
         HashSet<Integer> seen = new HashSet<>();
 
         int mn = Integer.MAX_VALUE;
-        int mx = Integer.MIN_VALUE;
+        int mx = Integer.MIN_VALUE; 
 
         for (int num : nums) {
             seen.add(num);
