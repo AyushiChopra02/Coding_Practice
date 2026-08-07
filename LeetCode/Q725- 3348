@@ -5,7 +5,7 @@ class Solution {
     int primes[] = new int[] { 2, 3, 5, 7 };
     int maxPrime = primes[primes.length - 1];
 
-    public String smallestNumber(String num, long t) {
+    public String smallestNumber(String num, long t) { 
         int primeCount[] = new int[maxPrime + 1];
         int numLength = num.length();
         int minLength;
