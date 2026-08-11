@@ -1,0 +1,28 @@
+https://leetcode.com/problems/orderly-queue/description/?envType=problem-list-v2&envId=sorting
+
+class Solution {
+    public String orderlyQueue(String s, int k) {
+        if( k > 1 ) {
+            char[] ch = s.toCharArray();
+
+            Arrays.sort( ch );
+
+            String res = new String(ch);
+
+            return res;
+        }
+
+        String result = s;
+        int n = s.length();
+        for( int l = 1; l <= n - 1; l++ ) {
+            String temp = s.substring(l) + s.substring(0, l);
+
+            if( temp.compareTo( result ) < 0 ) {
+                result = temp;
+            }
+        }
+
+        return result;
+
+    }
+}
