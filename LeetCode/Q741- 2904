@@ -1,0 +1,27 @@
+https://leetcode.com/problems/shortest-and-lexicographically-smallest-beautiful-string/description/?envType=daily-question&envId=2026-08-26
+
+class Solution {
+    public String shortestBeautifulSubstring(String s, int k) {
+        String ans = "";
+
+        for (int i = 0; i < s.length(); i++) {
+            int ones = 0;
+
+            for (int j = i; j < s.length(); j++) {
+                if (s.charAt(j) == '1') ones++;
+
+                if (ones == k) {
+                    String cur = s.substring(i, j + 1);
+
+                    if (ans.isEmpty() || cur.length() < ans.length() ||
+                        (cur.length() == ans.length() && cur.compareTo(ans) < 0)) {
+                        ans = cur;
+                    }
+                    break;
+                }
+            }
+        }
+
+        return ans;
+    }
+}
