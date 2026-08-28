@@ -1,4 +1,4 @@
-class Solution {
+class Solution { 
     public String isPossible(int n, int[] freqIn, String cur, char mid, String target){
         int[] freq = freqIn.clone(); // copy, since C++ passes freq by value here
 
