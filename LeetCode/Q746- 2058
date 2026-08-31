@@ -3,7 +3,7 @@ class Solution {
         List<Integer> nums = new ArrayList<>();
 
         while(head != null){
-            nums.add(head.val);
+            nums.add(head.val); 
             head = head.next;
         }
 
