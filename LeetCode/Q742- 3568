@@ -4,7 +4,7 @@ class Solution {
     public int minMoves(String[] classroom, int energy) {
         int m = classroom.length;
         int n = classroom[0].length();
-
+ 
         int sr = -1, sc = -1;
         int cnt = 0;
 
