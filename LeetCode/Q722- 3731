@@ -1,7 +1,7 @@
 class Solution {
     public List<Integer> findMissingElements(int[] nums) {
         HashSet<Integer> seen = new HashSet<>();
-
+ 
         int mn = Integer.MAX_VALUE;
         int mx = Integer.MIN_VALUE; 
 
