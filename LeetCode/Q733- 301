@@ -1,6 +1,6 @@
 class Solution {
     public List<String> removeInvalidParentheses(String s) {
-        List<String> ans = new ArrayList<>();
+        List<String> ans = new ArrayList<>(); 
         remove(s, ans, 0, 0, new char[]{'(', ')'});
         return ans;
     }
