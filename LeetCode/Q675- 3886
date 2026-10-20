@@ -1,0 +1,64 @@
+class Solution {
+    public int[] checkCyclic(int start, int end, int nums[])
+    {
+        int arr[]= new int[3];      
+        arr[0]= nums[start];
+        arr[1]= nums[start];
+
+        int n= end-start+1;
+        int falseCount=0;
+
+       
+        for(int i= start; i<=end; i++)
+        {
+            if((i<end && nums[i]>nums[i+1]) || (i==end && nums[end] > nums[start]))
+                falseCount++;
+
+            arr[0]= Math.min(arr[0], nums[i]);
+            arr[1]= Math.max(arr[1], nums[i]);
+        }
+
+      
+        if(falseCount>=2)
+            arr[2]= 0;              
+        else 
+            arr[2]= 1;             
+        
+        return arr;
+    }
+
+    public int sortableIntegers(int[] nums) {
+        int n= nums.length;
+
+        List<Integer> div= new ArrayList<>();
+        for(int i=1; i<=n; i++)
+        {
+            if(n%i==0)
+                div.add(i);
+        }
+
+        int sum= 0;
+
+        for(int k: div)
+        {
+            boolean isValid= true;
+            int prevMax= -1;
+
+         
+            for(int i=0; i<n; i+= k)
+            {
+                int arr[]= checkCyclic(i, i+k-1, nums);      
+
+                if(arr[2]==0 || arr[0] < prevMax)
+                {
+                    isValid= false;
+                    break;
+                }
+                prevMax= arr[1];
+            }
+            if(isValid)
+                sum+= k;
+        }
+        return sum;
+    }
+}
