@@ -1,0 +1,7 @@
+class Solution {
+    public int numOfSubarrays(int[] arr) {
+        Arrays.parallelPrefix(arr, Integer::sum);  
+        long odd = Arrays.stream(arr).map(p -> p & 1).sum(); 
+        return (int) (odd * (arr.length + 1 - odd) % 1_000_000_007); 
+    }
+}
