@@ -1,0 +1,42 @@
+class Solution {
+    public int minimumChanges(String s, int k) {
+        int n = s.length();
+        int[][] cost = new int[n][n];
+        for (int start = 0; start < n; start++){
+            for (int end = start+1; end < n; end++){
+                int len = end-start+1;
+                int minCost = len;
+                for (int d = 1; d < len; d++){
+                    if (len % d != 0) continue;
+                    int misMatch = 0;
+                    for (int offset = 0; offset < d; offset++){
+                        int l = start+offset;
+                        int r = end-d+offset+1;
+                        while (l < r){
+                            if (s.charAt(l) != s.charAt(r)) misMatch++;
+                            l += d;
+                            r -= d;
+                        }
+                    }
+                    minCost = Math.min(minCost, misMatch);
+                }
+                cost[start][end] = minCost;
+            }
+        }
+        int[][] dp = new int[n][k+1];
+        for (int[] row : dp){
+            Arrays.fill(row, n);
+        }
+        for (int i = 1; i < n; i++){
+            dp[i][1] = cost[0][i];
+        }
+        for (int i = 0; i < n; i++){
+            for (int p = 2; p <= k; p++){
+                for (int j = 2*(p-1); j < i; j++){
+                    dp[i][p] = Math.min(dp[i][p], dp[j-1][p-1]+cost[j][i]);
+                }
+            }
+        }
+        return dp[n-1][k];        
+    }
+}
